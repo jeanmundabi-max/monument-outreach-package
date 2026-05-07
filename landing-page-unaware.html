@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Better Way to Save — For People Who Have Outgrown Their Bank</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --deep: #0c1220;
+  --dark: #141b2d;
+  --card: #1a2236;
+  --border: rgba(255,255,255,0.08);
+  --teal: #36737a;
+  --teal-glow: rgba(54,115,122,0.3);
+  --gold: #c4a265;
+  --gold-glow: rgba(196,162,101,0.2);
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.55);
+  --light: rgba(255,255,255,0.85);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 18px; scroll-behavior: smooth; background: var(--deep); }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--light);
+  background: var(--deep);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Scroll reveal */
+.rv { opacity: 0; transform: translateY(32px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.rv.on { opacity: 1; transform: translateY(0); }
+.rv.d1 { transition-delay: 0.1s; } .rv.d2 { transition-delay: 0.2s; } .rv.d3 { transition-delay: 0.3s; } .rv.d4 { transition-delay: 0.4s; }
+
+/* ======================================
+   1. BANNER — Gold on deep dark
+   ====================================== */
+.banner {
+  background: var(--deep);
+  color: var(--gold);
+  text-align: center;
+  padding: 14px 24px;
+  font-size: 0.72rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(196,162,101,0.15);
+}
+.banner span { opacity: 0.35; margin: 0 14px; }
+
+/* ======================================
+   2. NAV — Glassmorphism, no Monument
+   ====================================== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(12,18,32,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--white);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: rgba(255,255,255,0.1);
+  color: var(--white) !important;
+  padding: 10px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: all 0.3s !important;
+}
+.nav-cta:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* ======================================
+   3. HERO — Problem-first, warm glow
+   ====================================== */
+.hero {
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 80px 80px 100px;
+  position: relative;
+  overflow: hidden;
+  background: var(--deep);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(196,162,101,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 28px;
+  letter-spacing: -0.5px;
+}
+.hero-text h1 em {
+  font-style: italic;
+  color: var(--gold);
+  text-shadow: 0 0 40px var(--gold-glow);
+}
+.hero-text .subline {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 480px;
+  line-height: 1.7;
+}
+.hero-actions { display: flex; gap: 16px; }
+
+/* Buttons (pre-reveal = white/gold, no teal) */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--deep);
+  padding: 16px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255,255,255,0.1);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  color: var(--white);
+  padding: 16px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s;
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* Rate card — gradient border */
+.rate-card-wrap {
+  background: linear-gradient(180deg, rgba(196,162,101,0.4) 0%, transparent 50%, rgba(196,162,101,0.2) 100%);
+  border-radius: 21px;
+  padding: 1px;
+}
+.rate-card {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 48px 40px;
+  position: relative;
+}
+.rate-card .badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--deep);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.rate-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.rate-item:last-of-type { border-bottom: none; }
+.rate-item .name { font-size: 0.88rem; color: var(--muted); }
+.rate-item .rate {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-shadow: 0 0 30px var(--gold-glow);
+}
+.rate-item .rate small { font-size: 0.7rem; color: var(--muted); font-family: 'DM Sans', sans-serif; }
+.rate-card .fscs {
+  margin-top: 24px;
+  padding: 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.rate-card .fscs strong { color: var(--gold); }
+
+/* ======================================
+   SECTIONS — Base
+   ====================================== */
+.section {
+  padding: 100px 80px;
+  background: var(--deep);
+}
+.container { max-width: 1100px; margin: 0 auto; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+/* ======================================
+   4. VSL — Deep dark, glow border
+   ====================================== */
+.vsl {
+  background: var(--deep);
+  padding: 80px;
+  text-align: center;
+}
+.video-frame-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, rgba(196,162,101,0.3), rgba(255,255,255,0.05), rgba(196,162,101,0.2));
+  border-radius: 17px;
+  padding: 1px;
+}
+.video-frame {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 56.25%;
+  background: var(--card);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 60px rgba(196,162,101,0.06);
+}
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.play-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  backdrop-filter: blur(8px);
+}
+.play-btn:hover {
+  transform: scale(1.08);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 0 40px rgba(255,255,255,0.08);
+}
+.play-btn::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 20px solid var(--white);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  margin-left: 4px;
+}
+
+/* ======================================
+   5. PAIN — Dark cards, gold pain numbers
+   ====================================== */
+.pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.pain-card-wrap {
+  background: linear-gradient(180deg, rgba(196,162,101,0.15) 0%, transparent 60%);
+  border-radius: 17px;
+  padding: 1px;
+  transition: transform 0.3s;
+}
+.pain-card-wrap:hover { transform: translateY(-4px); }
+.pain-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 40px 32px;
+}
+.pain-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 16px;
+  text-shadow: 0 0 40px var(--gold-glow);
+}
+.pain-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.35;
+  font-style: italic;
+}
+.pain-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+/* ======================================
+   6. SOLUTION REVEAL — Teal enters dramatically
+   ====================================== */
+.reveal-section {
+  padding: 120px 80px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--deep) 0%, #0e1825 40%, #111e2e 100%);
+}
+.reveal-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--teal-glow) 0%, transparent 55%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+.reveal-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+.reveal-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.reveal-section h2 .brand-name {
+  color: var(--teal);
+  text-shadow: 0 0 50px var(--teal-glow);
+  font-weight: 600;
+}
+.reveal-section .section-lead { color: var(--muted); }
+
+.sol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.sol-card-wrap {
+  background: linear-gradient(180deg, var(--teal) 0%, transparent 50%, rgba(54,115,122,0.3) 100%);
+  border-radius: 17px;
+  padding: 1px;
+  transition: transform 0.3s;
+}
+.sol-card-wrap:hover { transform: translateY(-6px); }
+.sol-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 44px 32px;
+  text-align: center;
+  height: 100%;
+}
+.sol-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--teal);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 24px rgba(54,115,122,0.3);
+}
+.sol-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--white); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sol-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.sol-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+
+/* ======================================
+   7. STATS — Gold numbers, teal accents
+   ====================================== */
+.stats-section {
+  background: var(--dark);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat-item {
+  text-align: center;
+  padding: 56px 24px;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+  text-shadow: 0 0 40px var(--gold-glow);
+}
+.stat-label { font-size: 0.75rem; color: var(--muted); }
+.stat-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: var(--teal);
+  opacity: 0.5;
+}
+
+/* ======================================
+   8. TESTIMONIALS — Dark cards, gold quotes
+   ====================================== */
+.test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.test-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 40px 36px;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: transform 0.3s;
+}
+.test-card:hover { transform: translateY(-3px); }
+.test-card::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.3;
+  position: absolute;
+  top: 16px;
+  left: 28px;
+  line-height: 1;
+}
+.test-card blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--light);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.test-author { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+
+/* ======================================
+   9. VIDEO TESTIMONIALS — Dark with teal overlay
+   ====================================== */
+.vid-test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.vid-test-card {
+  background: var(--card);
+  border-radius: 16px;
+  aspect-ratio: 16/10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: border-color 0.3s;
+}
+.vid-test-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(54,115,122,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.vid-test-card:hover { border-color: rgba(54,115,122,0.3); }
+.vid-test-card .play-btn { width: 56px; height: 56px; }
+.vid-test-card .play-btn::after { border-left-width: 14px; border-top-width: 8px; border-bottom-width: 8px; margin-left: 3px; }
+.vid-test-label {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+/* ======================================
+   10. GOLDEN HIPPO — Teal checks on dark
+   ====================================== */
+.hippo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.hippo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  background: rgba(54,115,122,0.06);
+  border-radius: 12px;
+  border: 1px solid rgba(54,115,122,0.12);
+  transition: border-color 0.3s, background 0.3s;
+}
+.hippo-item:hover {
+  border-color: rgba(54,115,122,0.25);
+  background: rgba(54,115,122,0.1);
+}
+.hippo-check {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: var(--teal);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  box-shadow: 0 4px 12px rgba(54,115,122,0.3);
+}
+.hippo-check::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
+  transform: rotate(-45deg);
+  margin-top: -2px;
+}
+.hippo-item h4 { font-size: 0.88rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+.hippo-item p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+/* ======================================
+   11. COMPARISON — Dark table, teal Monument column
+   ====================================== */
+.comp-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.83rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.3);
+}
+.comp-table thead th {
+  background: var(--card);
+  color: var(--muted);
+  padding: 20px 24px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+.comp-table thead th.highlight {
+  background: var(--teal);
+  color: var(--white);
+  position: relative;
+}
+.comp-table thead th.highlight::before {
+  content: 'RECOMMENDED';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold);
+  color: var(--deep);
+  font-size: 0.55rem;
+  padding: 3px 12px;
+  border-radius: 0 0 6px 6px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.comp-table tbody td {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--dark);
+  color: var(--muted);
+}
+.comp-table tbody td.highlight {
+  background: rgba(54,115,122,0.1);
+  font-weight: 600;
+  color: var(--teal);
+  border-left: 1px solid rgba(54,115,122,0.15);
+  border-right: 1px solid rgba(54,115,122,0.15);
+}
+.comp-table tbody tr:last-child td { border-bottom: none; }
+.comp-table tbody td strong { color: var(--light); }
+.comp-table .check { color: var(--teal); font-weight: 700; }
+.comp-table .cross { color: rgba(255,255,255,0.2); }
+
+/* ======================================
+   12. HOW IT WORKS — Teal step numbers
+   ====================================== */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 12.5%;
+  width: 75%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  z-index: 0;
+  opacity: 0.3;
+}
+.step-card { text-align: center; position: relative; z-index: 1; }
+.step-num {
+  width: 56px;
+  height: 56px;
+  background: var(--teal);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(54,115,122,0.35);
+}
+.step-card h4 { font-size: 0.94rem; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+.step-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+/* ======================================
+   13. FAQ — Dark accordion, teal hover
+   ====================================== */
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--light);
+  text-align: left;
+  transition: color 0.3s;
+}
+.faq-q:hover { color: var(--teal); }
+.faq-arrow {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+  margin-left: 16px;
+  color: var(--muted);
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); color: var(--teal); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.23,1,0.32,1); }
+.faq-item.open .faq-a { max-height: 300px; }
+.faq-a-inner { padding: 0 0 24px; font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+/* ======================================
+   14. CTA — Teal background, gold accents
+   ====================================== */
+.cta-section {
+  text-align: center;
+  padding: 120px 80px;
+  background: linear-gradient(135deg, var(--teal) 0%, #2a5a60 100%);
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-section h2 { color: var(--white); font-size: 2.6rem; margin-bottom: 16px; }
+.cta-section .section-lead { color: rgba(255,255,255,0.7); margin: 0 auto 40px; text-align: center; max-width: 600px; }
+.cta-actions { display: flex; gap: 16px; justify-content: center; }
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--teal);
+  padding: 16px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.3s;
+}
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  color: var(--white);
+  padding: 16px 36px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  transition: all 0.3s;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.6);
+}
+
+/* ======================================
+   15. FOOTER — Deepest dark
+   ====================================== */
+.footer {
+  background: #080d18;
+  color: rgba(255,255,255,0.35);
+  padding: 48px 80px;
+  font-size: 0.72rem;
+  line-height: 1.8;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+/* ======================================
+   RESPONSIVE
+   ====================================== */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 28px; min-height: auto; }
+  .section, .reveal-section { padding: 64px 28px; }
+  .pain-grid, .sol-grid, .hippo-grid, .vid-test-grid { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .stat-item::after { display: none; }
+  .test-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid::before { display: none; }
+  .comp-table { font-size: 0.72rem; }
+  .comp-table thead th, .comp-table tbody td { padding: 12px 10px; }
+  h2 { font-size: 2rem; }
+  .hero-text h1 { font-size: clamp(28px, 7vw, 42px); }
+  .nav { padding: 0 24px; }
+  .nav-links { gap: 20px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .cta-section { padding: 64px 28px; }
+  .cta-actions { flex-direction: column; align-items: center; }
+  .footer { padding: 32px 24px; }
+  .vsl { padding: 48px 24px; }
+  .hero-actions { flex-direction: column; }
+  .btn-primary, .btn-secondary { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- 1. TOP BANNER — Gold on deep dark -->
+<div class="banner">There is a gap between your high street bank and private banking <span>|</span> Someone built the bank that fills it</div>
+
+<!-- 2. STICKY NAV — Glassmorphism, no Monument branding -->
+<nav class="nav">
+  <div class="nav-logo">A Better Way to Save</div>
+  <div class="nav-links">
+    <a href="#problem">The Problem</a>
+    <a href="#solution">The Solution</a>
+    <a href="#compare">Compare</a>
+    <a href="#learn" class="nav-cta">Learn More</a>
+  </div>
+</nav>
+
+<!-- 3. HERO — Problem-first, dark bg, warm gold glow, gradient-border rate card -->
+<section class="hero">
+  <div class="hero-text">
+    <h1 class="rv">Your bank treats you the same whether you have £10,000 <em>or £500,000.</em></h1>
+    <p class="subline rv d1">You have worked hard. You have saved well. You deserve better rates and someone who actually knows your name. Not a call centre. Not a chatbot. Not another best buy table to chase every 12 months.</p>
+    <div class="hero-actions rv d2">
+      <a href="#solution" class="btn-primary">See What Is Different</a>
+      <a href="#problem" class="btn-secondary">Read More</a>
+    </div>
+  </div>
+  <div class="rate-card-wrap rv d2">
+    <div class="rate-card">
+      <div class="badge">What good rates look like</div>
+      <div class="rate-item"><span class="name">Notice Account</span><span class="rate">4.09% <small>AER</small></span></div>
+      <div class="rate-item"><span class="name">Fixed Term</span><span class="rate">3.80% <small>AER</small></span></div>
+      <div class="rate-item"><span class="name">Cash ISA</span><span class="rate">3.74% <small>AER</small></span></div>
+      <div class="rate-item"><span class="name">Limited Access</span><span class="rate">3.74% <small>AER</small></span></div>
+      <div class="rate-item"><span class="name">Easy Access</span><span class="rate">3.52% <small>AER</small></span></div>
+      <div class="fscs"><strong>FSCS protected</strong> up to £120,000 per depositor</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. VSL — Deep dark, glow border video frame -->
+<section class="vsl">
+  <div class="video-frame-wrap rv">
+    <div class="video-frame">
+      <div class="video-placeholder">
+        <div class="play-btn"></div>
+        <span>Why thousands of savers are making the switch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. PAIN — Dark cards with gold pain numbers, buyer quotes as headings -->
+<section class="section" id="problem">
+  <div class="container">
+    <div class="section-tag rv">Sound familiar?</div>
+    <h2 class="rv">You should not have to settle for this.</h2>
+    <p class="section-lead rv d1">These are not hypothetical frustrations. These are real words from real savers who felt exactly the way you do right now.</p>
+    <div class="pain-grid">
+      <div class="pain-card-wrap rv d1">
+        <div class="pain-card">
+          <div class="pain-num">01</div>
+          <h3>"The big banks treat you the same whether you have £10,000 or £500,000."</h3>
+          <p>You are not a number. You have built something meaningful. But your bank does not recognise the difference. Same rates. Same hold music. Same impersonal service regardless of what you have saved.</p>
+        </div>
+      </div>
+      <div class="pain-card-wrap rv d2">
+        <div class="pain-card">
+          <div class="pain-num">02</div>
+          <h3>"I should not have to call Coutts with £250,000. That is not enough for them but it is a lot for me."</h3>
+          <p>Private banking starts at £1 million or more. If you have less, you are invisible to them. If you have more than what the high street cares about, you are stuck in no man's land. That gap should not exist.</p>
+        </div>
+      </div>
+      <div class="pain-card-wrap rv d3">
+        <div class="pain-card">
+          <div class="pain-num">03</div>
+          <h3>"Every year I check best buy tables. Switch. Wait. Switch again. There has to be a better way."</h3>
+          <p>Rate chasing is exhausting. You should not have to babysit your savings every 12 months just to avoid getting a worse deal. You deserve a bank that earns your loyalty, not one that punishes it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SOLUTION REVEAL — Monument name appears, teal enters the palette for the first time -->
+<section class="reveal-section" id="solution">
+  <div class="container">
+    <div class="reveal-tag rv">The bank that fills the gap</div>
+    <h2 class="rv">We built a bank for exactly this gap. It is called <span class="brand-name">Monument.</span></h2>
+    <p class="section-lead rv d1">Not a neobank for everyone. Not a private bank with a seven figure minimum. A UK bank designed specifically for people who want better rates and someone who knows their name. FSCS protected. Relationship driven.</p>
+    <div class="sol-grid">
+      <div class="sol-card-wrap rv d1">
+        <div class="sol-card">
+          <div class="sol-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>Someone who knows your name</h3>
+          <p>Your own relationship manager. Not a chatbot. Not a queue. A real person who understands your financial picture and calls you first.</p>
+        </div>
+      </div>
+      <div class="sol-card-wrap rv d2">
+        <div class="sol-card">
+          <div class="sol-icon"><svg viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <h3>Rates that respect your savings</h3>
+          <p>Up to 4.09% AER across savings products. Competitive with the best buy tables, without forcing you to switch every year to keep it.</p>
+        </div>
+      </div>
+      <div class="sol-card-wrap rv d3">
+        <div class="sol-card">
+          <div class="sol-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Your money is protected</h3>
+          <p>Full UK banking licence. Authorised by the PRA. Regulated by the FCA and PRA. Your eligible deposits are FSCS protected up to £120,000.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. STATS — Gold numbers on dark, teal accents -->
+<section class="stats-section">
+  <div class="stats-bar rv">
+    <div class="stat-item"><div class="stat-num">£7B</div><div class="stat-label">In savings trusted to Monument</div></div>
+    <div class="stat-item"><div class="stat-num">4.7★</div><div class="stat-label">Trustpilot (1,794 reviews)</div></div>
+    <div class="stat-item"><div class="stat-num">4.9</div><div class="stat-label">Star app rating</div></div>
+    <div class="stat-item"><div class="stat-num">2025</div><div class="stat-label">Best Savings Provider</div></div>
+  </div>
+</section>
+
+<!-- 8. TESTIMONIALS — Dark cards, gold quotes -->
+<section class="section">
+  <div class="container">
+    <div class="section-tag rv">People who made the switch</div>
+    <h2 class="rv">They wanted better rates without feeling like a number. They found both.</h2>
+    <div class="test-grid" style="margin-top:40px">
+      <div class="test-card rv d1"><blockquote>"I wanted better rates but I did not want to feel like a number. For the first time, I have both."</blockquote><div class="test-author">Verified depositor</div></div>
+      <div class="test-card rv d2"><blockquote>"My high street bank had no idea I had £300,000 with them. My relationship manager here called me by name on day one."</blockquote><div class="test-author">Verified depositor</div></div>
+      <div class="test-card rv d3"><blockquote>"I need FSCS protection. I am not gambling with my savings. This gave me the safety and the service I could not find anywhere else."</blockquote><div class="test-author">Verified depositor</div></div>
+      <div class="test-card rv d4"><blockquote>"I stopped chasing best buy tables. The rates are competitive, the app is beautiful, and I actually have a human being to talk to when I need one."</blockquote><div class="test-author">Verified depositor</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. VIDEO TESTIMONIALS — Dark with teal overlay -->
+<section class="section" style="background: var(--dark);">
+  <div class="container">
+    <div class="section-tag rv">Hear their stories</div>
+    <h2 class="rv">Real savers. Real experiences. Real reasons they switched.</h2>
+    <div class="vid-test-grid" style="margin-top:40px">
+      <div class="vid-test-card rv d1"><div class="play-btn"></div><div class="vid-test-label">"I had £400K with HSBC and they had no idea"</div></div>
+      <div class="vid-test-card rv d2"><div class="play-btn"></div><div class="vid-test-label">"Private banks said no. This one said welcome."</div></div>
+      <div class="vid-test-card rv d3"><div class="play-btn"></div><div class="vid-test-label">"The relationship manager changed everything for me"</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. GOLDEN HIPPO — Teal checks on dark -->
+<section class="section">
+  <div class="container">
+    <div class="section-tag rv">What you actually get</div>
+    <h2 class="rv">Everything a saver like you should expect. Nothing hidden.</h2>
+    <p class="section-lead rv d1">No hidden fees. No tiered service. No minimum that locks out real savers. Every depositor gets the full experience from day one.</p>
+    <div class="hippo-grid" style="margin-top:40px">
+      <div class="hippo-item rv d1"><div class="hippo-check"></div><div><h4>FSCS protection up to £120,000</h4><p>Your savings are protected by the same UK government scheme that covers Barclays, HSBC, and Lloyds.</p></div></div>
+      <div class="hippo-item rv d1"><div class="hippo-check"></div><div><h4>Your own relationship manager</h4><p>A named person who knows you, your goals, and your savings. They call you. You do not call a queue.</p></div></div>
+      <div class="hippo-item rv d2"><div class="hippo-check"></div><div><h4>4.9 star rated app</h4><p>Manage your savings, track rates, and message your manager anytime from your phone.</p></div></div>
+      <div class="hippo-item rv d2"><div class="hippo-check"></div><div><h4>Rates up to 4.09% AER</h4><p>Across five product types: fixed, notice, easy access, limited access, and Cash ISA.</p></div></div>
+      <div class="hippo-item rv d3"><div class="hippo-check"></div><div><h4>Property lending available</h4><p>Buy to let, bridging, and development finance alongside your savings. One relationship for both.</p></div></div>
+      <div class="hippo-item rv d3"><div class="hippo-check"></div><div><h4>Tax free Cash ISA</h4><p>3.74% AER. £20,000 annual allowance. FSCS protected like every other Monument account.</p></div></div>
+      <div class="hippo-item rv d4"><div class="hippo-check"></div><div><h4>Deposits from £25,000</h4><p>No seven figure minimum. Built for savers who have done well and want their bank to recognise it.</p></div></div>
+      <div class="hippo-item rv d4"><div class="hippo-check"></div><div><h4>Hold up to £2,000,000</h4><p>Room to grow. Multiple account types under one relationship manager who knows your full picture.</p></div></div>
+      <div class="hippo-item rv d4"><div class="hippo-check"></div><div><h4>FCA and PRA regulated</h4><p>Full UK banking licence. Authorised and regulated to the highest standard. This is a real bank.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. COMPARISON TABLE — Dark table, Monument column in teal highlight -->
+<section class="section" style="background: var(--dark);" id="compare">
+  <div class="container">
+    <div class="section-tag rv">How does your bank compare?</div>
+    <h2 class="rv">See the difference side by side.</h2>
+    <p class="section-lead rv d1">Your high street bank. The neobanks. The private banks that will not take your call. And the bank that was built for the gap in between.</p>
+    <table class="comp-table rv d2">
+      <thead><tr><th></th><th>High Street</th><th>Neobanks</th><th>Private Banks</th><th class="highlight">Monument</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Minimum deposit</strong></td><td>£0</td><td>£0</td><td>£1,000,000+</td><td class="highlight">£25,000</td></tr>
+        <tr><td><strong>Top savings rate</strong></td><td>~2.50%</td><td>~3.25%</td><td>By arrangement</td><td class="highlight">4.09% AER</td></tr>
+        <tr><td><strong>Personal manager</strong></td><td>Limited</td><td><span class="cross">No</span></td><td><span class="check">Yes</span></td><td class="highlight"><span class="check">Yes</span></td></tr>
+        <tr><td><strong>FSCS protected</strong></td><td><span class="check">£120K</span></td><td>Partial</td><td><span class="check">£120K</span></td><td class="highlight"><span class="check">£120K</span></td></tr>
+        <tr><td><strong>App rating</strong></td><td>~4.0 stars</td><td>4.7 stars</td><td>3.2 stars</td><td class="highlight">4.9 stars</td></tr>
+        <tr><td><strong>Property lending</strong></td><td>Limited</td><td><span class="cross">No</span></td><td><span class="check">Yes</span></td><td class="highlight"><span class="check">Yes</span></td></tr>
+        <tr><td><strong>Knows your name</strong></td><td><span class="cross">No</span></td><td><span class="cross">No</span></td><td>If you have £1M</td><td class="highlight"><span class="check">Yes</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 12. HOW IT WORKS — Teal step numbers -->
+<section class="section" id="learn">
+  <div class="container">
+    <div class="section-tag rv">How it works</div>
+    <h2 class="rv">Four steps. Five minutes. Your relationship manager calls within 24 hours.</h2>
+    <div class="steps-grid" style="margin-top:48px">
+      <div class="step-card rv d1"><div class="step-num">1</div><h4>Download the app</h4><p>Available on iOS and Android. Rated 4.9 stars by thousands of depositors who made the same switch.</p></div>
+      <div class="step-card rv d2"><div class="step-num">2</div><h4>Verify your identity</h4><p>Quick and secure. Photo ID and a selfie. Takes about 3 minutes. No paperwork. No branch visit.</p></div>
+      <div class="step-card rv d3"><div class="step-num">3</div><h4>Make your first deposit</h4><p>From £25,000. Choose your account type: fixed, notice, easy access, limited access, or Cash ISA.</p></div>
+      <div class="step-card rv d4"><div class="step-num">4</div><h4>Meet your manager</h4><p>Your relationship manager introduces themselves within 24 hours. By name. Not a ticket number. Not a chatbot.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. FAQ — Dark accordion, teal hover -->
+<section class="section" style="background: var(--dark);">
+  <div class="container">
+    <div class="section-tag rv">Your questions answered</div>
+    <h2 class="rv">Everything you want to know before trusting someone new with your savings.</h2>
+    <div class="faq-list" style="margin-top:40px">
+      <div class="faq-item rv"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is Monument?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div class="faq-a-inner">Monument is a UK bank built for savers who have outgrown their high street bank but do not meet the minimums for private banking. It combines competitive savings rates (up to 4.09% AER), a personal relationship manager, and a 4.9 star rated app. Over £7 billion in savings have been entrusted to Monument since launch.</div></div></div>
+      <div class="faq-item rv d1"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is this a real bank?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div class="faq-a-inner">Yes. Monument is authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the PRA (FRN 849724). It holds a full UK banking licence. Your eligible deposits are FSCS protected up to £120,000 per person. That is the same protection you get at Barclays, HSBC, or any other UK bank.</div></div></div>
+      <div class="faq-item rv d1"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Why have I not heard of Monument before?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div class="faq-a-inner">Monument does not spend hundreds of millions on television adverts or high street branches. It focuses that money on better rates and personal service instead. Word of mouth from depositors and industry recognition (British Banking Awards 2025: Best Savings Provider) are how most people discover it. The people who find Monument tend to be the ones actively searching for something better.</div></div></div>
+      <div class="faq-item rv d2"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my money safe?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div class="faq-a-inner">Your eligible deposits are protected by the Financial Services Compensation Scheme (FSCS) up to £120,000 per person. For couples, that means up to £240,000 between joint accounts. Monument is fully regulated by the FCA and PRA, holding the same licence type as every major UK bank.</div></div></div>
+      <div class="faq-item rv d2"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is the minimum deposit?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div class="faq-a-inner">£25,000 for savings accounts and £10,000 for the Cash ISA. You can hold up to £2,000,000 across your Monument accounts. No seven figure minimum like private banks. Built for savers who have done well and want a bank that recognises it.</div></div></div>
+      <div class="faq-item rv d3"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How is Monument different from Revolut or Monzo?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div class="faq-a-inner">Revolut and Monzo are mass market neobanks built for everyday spending. Monument is a savings and lending bank built for people who want a personal relationship manager, competitive rates up to 4.09% AER, and full FSCS protection across all products. Neobanks do not offer a dedicated manager. Monument does, from day one.</div></div></div>
+      <div class="faq-item rv d3"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I switch from my current bank?<svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><div class="faq-a-inner">Download the app, verify your identity, and transfer your savings. Most deposits arrive the same day. Your relationship manager will guide you through the process. It takes about five minutes to set up. Most people wonder why they did not do it sooner.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14. FINAL CTA — Teal background, gold accents -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="rv">Discover what £7 billion in savers already know.</h2>
+    <p class="section-lead rv d1">Better rates. A relationship manager who knows your name. FSCS protection up to £120,000. The bank you have been looking for exists. It is called Monument.</p>
+    <div class="cta-actions rv d2">
+      <a href="#" class="btn-white">Learn More About Monument</a>
+      <a href="#" class="btn-ghost">Get Rate Alerts</a>
+    </div>
+  </div>
+</section>
+
+<!-- 15. FOOTER — Deepest dark -->
+<footer class="footer">
+  <p>Monument is the trading name of Monument Bank Limited. Authorised by the Prudential Regulation Authority and regulated by the Financial Conduct Authority and the Prudential Regulation Authority (FRN 849724). Eligible deposits are protected up to £120,000 by the Financial Services Compensation Scheme. Rates are variable and may change. Fixed rates are guaranteed for the term selected. Minimum deposit £25,000 for savings accounts, £10,000 for Cash ISA. Maximum deposit £2,000,000.</p>
+  <p style="margin-top:12px;opacity:0.5">© 2026 Monument Bank Limited. All rights reserved.</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

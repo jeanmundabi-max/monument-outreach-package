@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monument Ad Creative — Aware Audience</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --deep: #0c1220;
+  --dark: #141b2d;
+  --card: #1a2236;
+  --border: rgba(255,255,255,0.08);
+  --teal: #36737a;
+  --teal-deep: #2a5a60;
+  --teal-glow: rgba(54,115,122,0.3);
+  --gold: #c4a265;
+  --gold-glow: rgba(196,162,101,0.2);
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.55);
+  --light: rgba(255,255,255,0.85);
+  --green: #00b67a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 18px; scroll-behavior: smooth; background: var(--deep); }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--light);
+  background: var(--deep);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* REVEAL */
+.rv { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+.rv.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+/* HEADER */
+.page-header {
+  background: var(--deep);
+  padding: 80px 60px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(circle, var(--teal-glow) 0%, transparent 65%);
+  pointer-events: none;
+  opacity: 0.3;
+}
+.page-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 50px;
+  background: rgba(54,115,122,0.1);
+  border: 1px solid rgba(54,115,122,0.25);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.page-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.page-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.page-header h1 em { font-style: italic; color: var(--teal); }
+.page-subtitle {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* CONTENT AREA */
+.content { max-width: 1200px; margin: 0 auto; padding: 60px 40px 80px; }
+
+/* JOURNEY ROW */
+.journey-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  align-items: center;
+  margin-bottom: 72px;
+}
+
+/* AD CREATIVE CARD */
+.ad-creative-wrap {
+  background: linear-gradient(180deg, var(--teal), transparent 40%, var(--teal));
+  border-radius: 21px;
+  padding: 1px;
+}
+.ad-creative {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 50px -10px var(--teal-glow);
+}
+.ad-creative-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.ad-platform {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ad-platform-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--white);
+}
+.ad-platform-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--light);
+  letter-spacing: 0.3px;
+}
+.ad-sponsor-tag {
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+.ad-label-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(196,162,101,0.12);
+  color: var(--gold);
+}
+
+/* AD BODY */
+.ad-body {
+  padding: 32px 28px 28px;
+  position: relative;
+  background: var(--deep);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.ad-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.08;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 30px,
+    rgba(54,115,122,0.1) 30px,
+    rgba(54,115,122,0.1) 31px
+  );
+  pointer-events: none;
+}
+
+/* MONUMENT BRAND MARK */
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 50px;
+  background: var(--gold);
+  color: var(--deep);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.brand-mark-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--deep);
+}
+
+.ad-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.ad-headline strong {
+  color: var(--teal);
+  font-weight: 600;
+}
+.ad-headline .gold {
+  color: var(--gold);
+}
+
+.ad-subtext {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* TRUSTPILOT IN AD */
+.ad-trustpilot {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(0, 182, 122, 0.08);
+  border: 1px solid rgba(0, 182, 122, 0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.tp-stars { display: flex; gap: 2px; }
+.tp-star {
+  width: 18px;
+  height: 18px;
+  background: var(--green);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.tp-star-half {
+  background: linear-gradient(90deg, var(--green) 50%, rgba(255,255,255,0.15) 50%);
+}
+.tp-text {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--green);
+}
+.tp-count {
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+/* AD CTA */
+.ad-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--deep);
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.ad-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255,255,255,0.12);
+}
+.ad-cta-arrow { font-size: 0.9rem; }
+
+/* DECORATIVE ELEMENTS */
+.ad-accent-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+}
+.ad-accent-corner {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-top: 2px solid var(--teal);
+  border-right: 2px solid var(--teal);
+  opacity: 0.3;
+  border-radius: 0 8px 0 0;
+  z-index: 1;
+}
+.ad-accent-corner-bl {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-bottom: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+  opacity: 0.2;
+  border-radius: 0 0 0 8px;
+  z-index: 1;
+}
+.ad-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* ARROW CONNECTOR */
+.arrow-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  position: relative;
+}
+.arrow-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  position: relative;
+}
+.arrow-line::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -5px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid var(--gold);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.arrow-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* LANDING PAGE PREVIEW */
+.lp-preview-wrap {
+  background: linear-gradient(180deg, rgba(196,162,101,0.2), transparent 40%, rgba(196,162,101,0.1));
+  border-radius: 17px;
+  padding: 1px;
+}
+.lp-preview {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 40px -10px var(--gold-glow);
+}
+.lp-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+}
+.lp-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.lp-dot-r { background: #ef4444; }
+.lp-dot-y { background: #f59e0b; }
+.lp-dot-g { background: #22c55e; }
+.lp-url {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.58rem;
+  color: var(--muted);
+  font-family: 'DM Sans', monospace;
+  margin-left: 8px;
+}
+
+/* MINI LANDING PAGE */
+.lp-mini {
+  padding: 24px 20px;
+  background: var(--deep);
+  min-height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+.lp-mini::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--teal-glow) 0%, transparent 65%);
+  pointer-events: none;
+  opacity: 0.3;
+}
+.lp-mini-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.lp-mini-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.lp-mini-nav-links {
+  display: flex;
+  gap: 8px;
+}
+.lp-mini-nav-link {
+  width: 28px;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+}
+.lp-mini-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+.lp-mini-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+.lp-mini-h1 em { font-style: italic; color: var(--teal); }
+.lp-mini-sub {
+  font-size: 0.52rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.lp-mini-btn {
+  display: inline-block;
+  background: var(--white);
+  color: var(--deep);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 0.5rem;
+  font-weight: 600;
+}
+.lp-mini-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 14px 12px;
+  border: 1px solid var(--border);
+}
+.lp-mini-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--deep);
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.lp-mini-rate {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.lp-mini-rate:last-child { border-bottom: none; }
+.lp-mini-rate-name {
+  font-size: 0.48rem;
+  color: var(--muted);
+}
+.lp-mini-rate-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+
+.lp-tag {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+}
+
+/* AD NUMBER */
+.journey-number {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.journey-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 40px var(--gold-glow);
+  opacity: 0.6;
+}
+.journey-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.journey-angle {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.journey-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* STRATEGY NOTES */
+.strategy-section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.strategy-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.strategy-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.strategy-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.2;
+}
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.strategy-card-wrap {
+  background: linear-gradient(180deg, var(--teal), transparent 50%, var(--teal));
+  border-radius: 17px;
+  padding: 1px;
+}
+.strategy-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 36px 28px;
+  height: 100%;
+}
+.strategy-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--teal);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.strategy-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.strategy-label {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+.label-comparison {
+  background: rgba(54,115,122,0.15);
+  color: var(--teal);
+}
+.label-social-proof {
+  background: rgba(0,182,122,0.1);
+  color: var(--green);
+}
+.label-rate-led {
+  background: rgba(196,162,101,0.12);
+  color: var(--gold);
+}
+.strategy-card p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.strategy-card .metric {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.metric-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+/* FOOTER */
+.page-footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid var(--border);
+}
+.page-footer p {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.page-footer .credit {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .journey-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .arrow-connector {
+    transform: rotate(90deg);
+    padding: 12px 0;
+  }
+  .strategy-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .content { padding: 40px 20px 60px; }
+  .page-header { padding: 60px 24px 40px; }
+  .lp-mini-hero { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="rv">
+    <div class="page-badge">Aware Audience</div>
+  </div>
+  <h1 class="rv d1">Monument Ad Creative<br><em>Aware Audience</em></h1>
+  <p class="page-subtitle rv d2">Each ad drives to the corresponding landing page. These prospects know Monument exists. They are comparing options. The ads lead with proof, rates, and brand strength.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- AD 1: COMPARISON -->
+<div class="journey-number rv">
+  <div class="journey-num">01</div>
+  <div class="journey-title">
+    <span class="journey-angle">Comparison Angle</span>
+    <span class="journey-desc">Side-by-side framing against the incumbent</span>
+  </div>
+</div>
+
+<div class="journey-row rv d1">
+  <!-- AD CREATIVE -->
+  <div class="ad-creative-wrap">
+    <div class="ad-creative">
+      <div class="ad-creative-header">
+        <div class="ad-platform">
+          <div class="ad-platform-icon">in</div>
+          <div>
+            <div class="ad-platform-name">Monument</div>
+            <div class="ad-sponsor-tag">Sponsored</div>
+          </div>
+        </div>
+        <div class="ad-label-tag">Comparison</div>
+      </div>
+      <div class="ad-body">
+        <div class="ad-glow" style="top:-40px;left:-40px;background:var(--teal-glow);"></div>
+        <div class="ad-glow" style="bottom:-60px;right:-40px;background:var(--gold-glow);"></div>
+        <div class="ad-accent-corner"></div>
+        <div class="ad-accent-corner-bl"></div>
+        <div class="brand-mark"><span class="brand-mark-dot"></span> Monument</div>
+        <div class="ad-headline">Coutts: <span class="gold">&pound;1M minimum.</span><br>Monument: <strong>&pound;25,000.</strong></div>
+        <div class="ad-subtext">Same personal service. Better rates. 4.7&#9733; Trustpilot.</div>
+        <div class="ad-trustpilot">
+          <div class="tp-stars">
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star tp-star-half"></div>
+          </div>
+          <div>
+            <div class="tp-text">4.7 Excellent</div>
+            <div class="tp-count">1,794 reviews</div>
+          </div>
+        </div>
+        <div class="ad-cta">Compare Rates <span class="ad-cta-arrow">&rarr;</span></div>
+        <div class="ad-accent-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-connector">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">Click</div>
+  </div>
+
+  <!-- LANDING PAGE PREVIEW -->
+  <div class="lp-preview-wrap">
+    <div class="lp-preview">
+      <div class="lp-browser-bar">
+        <div class="lp-dot lp-dot-r"></div>
+        <div class="lp-dot lp-dot-y"></div>
+        <div class="lp-dot lp-dot-g"></div>
+        <div class="lp-url">monument.co/compare</div>
+      </div>
+      <div class="lp-mini">
+        <div class="lp-mini-nav">
+          <div class="lp-mini-logo">Monument</div>
+          <div class="lp-mini-nav-links">
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+          </div>
+        </div>
+        <div class="lp-mini-hero">
+          <div>
+            <div class="lp-mini-h1">Banking That<br><em>Knows Your Name</em></div>
+            <div class="lp-mini-sub">Personal service, premium rates, FSCS protected. No seven-figure minimum. Your relationship manager calls within 24 hours.</div>
+            <div class="lp-mini-btn">Compare Rates &rarr;</div>
+          </div>
+          <div class="lp-mini-card">
+            <div class="lp-mini-badge">Current Rates</div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">90-Day Notice</span>
+              <span class="lp-mini-rate-val">4.09%</span>
+            </div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">1-Year Fixed</span>
+              <span class="lp-mini-rate-val">3.85%</span>
+            </div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">2-Year Fixed</span>
+              <span class="lp-mini-rate-val">3.60%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-tag">landing-page-aware.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- AD 2: SOCIAL PROOF -->
+<div class="journey-number rv">
+  <div class="journey-num">02</div>
+  <div class="journey-title">
+    <span class="journey-angle">Social Proof Angle</span>
+    <span class="journey-desc">Trust signals stacked for instant credibility</span>
+  </div>
+</div>
+
+<div class="journey-row rv d1">
+  <!-- AD CREATIVE -->
+  <div class="ad-creative-wrap">
+    <div class="ad-creative">
+      <div class="ad-creative-header">
+        <div class="ad-platform">
+          <div class="ad-platform-icon">f</div>
+          <div>
+            <div class="ad-platform-name">Monument</div>
+            <div class="ad-sponsor-tag">Sponsored</div>
+          </div>
+        </div>
+        <div class="ad-label-tag">Social Proof</div>
+      </div>
+      <div class="ad-body">
+        <div class="ad-glow" style="top:-20px;right:-60px;background:rgba(0,182,122,0.15);"></div>
+        <div class="ad-glow" style="bottom:-40px;left:-30px;background:var(--teal-glow);"></div>
+        <div class="ad-accent-corner"></div>
+        <div class="ad-accent-corner-bl"></div>
+        <div class="brand-mark"><span class="brand-mark-dot"></span> Monument</div>
+        <div class="ad-headline"><strong>&pound;7 billion</strong> trusted.</div>
+        <div class="ad-subtext" style="margin-bottom:12px;">4.7&#9733; on Trustpilot. Best Savings Provider 2025.</div>
+        <div class="ad-trustpilot" style="margin-bottom:16px;">
+          <div class="tp-stars">
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star tp-star-half"></div>
+          </div>
+          <div>
+            <div class="tp-text">4.7 Excellent</div>
+            <div class="tp-count">1,794 reviews</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;position:relative;z-index:1;">
+          <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:50px;background:rgba(54,115,122,0.1);border:1px solid rgba(54,115,122,0.2);">
+            <span style="font-size:0.85rem;">&#127942;</span>
+            <span style="font-size:0.65rem;font-weight:600;color:var(--teal);">Best Savings Provider</span>
+          </div>
+          <div style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:50px;background:rgba(196,162,101,0.1);border:1px solid rgba(196,162,101,0.2);">
+            <span style="font-size:0.85rem;">&#128274;</span>
+            <span style="font-size:0.65rem;font-weight:600;color:var(--gold);">FSCS Protected</span>
+          </div>
+        </div>
+        <div class="ad-cta">See Why <span class="ad-cta-arrow">&rarr;</span></div>
+        <div class="ad-accent-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-connector">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">Click</div>
+  </div>
+
+  <!-- LANDING PAGE PREVIEW -->
+  <div class="lp-preview-wrap">
+    <div class="lp-preview">
+      <div class="lp-browser-bar">
+        <div class="lp-dot lp-dot-r"></div>
+        <div class="lp-dot lp-dot-y"></div>
+        <div class="lp-dot lp-dot-g"></div>
+        <div class="lp-url">monument.co/why-monument</div>
+      </div>
+      <div class="lp-mini">
+        <div class="lp-mini-nav">
+          <div class="lp-mini-logo">Monument</div>
+          <div class="lp-mini-nav-links">
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+          </div>
+        </div>
+        <div class="lp-mini-hero">
+          <div>
+            <div class="lp-mini-h1">Banking That<br><em>Knows Your Name</em></div>
+            <div class="lp-mini-sub">Personal service, premium rates, FSCS protected. No seven-figure minimum. Your relationship manager calls within 24 hours.</div>
+            <div class="lp-mini-btn">See Why &rarr;</div>
+          </div>
+          <div class="lp-mini-card">
+            <div class="lp-mini-badge">Trusted</div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">Assets Held</span>
+              <span class="lp-mini-rate-val">&pound;7B+</span>
+            </div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">Trustpilot</span>
+              <span class="lp-mini-rate-val">4.7&#9733;</span>
+            </div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">Protection</span>
+              <span class="lp-mini-rate-val">FSCS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-tag">landing-page-aware.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- AD 3: RATE-LED -->
+<div class="journey-number rv">
+  <div class="journey-num">03</div>
+  <div class="journey-title">
+    <span class="journey-angle">Rate-Led Angle</span>
+    <span class="journey-desc">Lead with the number, support with the experience</span>
+  </div>
+</div>
+
+<div class="journey-row rv d1">
+  <!-- AD CREATIVE -->
+  <div class="ad-creative-wrap">
+    <div class="ad-creative">
+      <div class="ad-creative-header">
+        <div class="ad-platform">
+          <div class="ad-platform-icon">G</div>
+          <div>
+            <div class="ad-platform-name">Monument</div>
+            <div class="ad-sponsor-tag">Sponsored</div>
+          </div>
+        </div>
+        <div class="ad-label-tag">Rate-Led</div>
+      </div>
+      <div class="ad-body">
+        <div class="ad-glow" style="top:-30px;left:50%;transform:translateX(-50%);background:var(--gold-glow);width:300px;height:300px;"></div>
+        <div class="ad-accent-corner"></div>
+        <div class="ad-accent-corner-bl"></div>
+        <div class="brand-mark"><span class="brand-mark-dot"></span> Monument</div>
+        <div class="ad-headline">Up to <span class="gold">4.09% AER.</span><br>FSCS protected.</div>
+        <div class="ad-subtext">Your relationship manager calls within 24 hours. Personal banking without the seven-figure barrier.</div>
+        <div style="display:flex;gap:16px;margin-bottom:24px;position:relative;z-index:1;">
+          <div style="text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--gold);line-height:1;">4.09%</div>
+            <div style="font-size:0.52rem;color:var(--muted);margin-top:2px;">90-DAY NOTICE</div>
+          </div>
+          <div style="width:1px;background:var(--border);"></div>
+          <div style="text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--teal);line-height:1;">3.85%</div>
+            <div style="font-size:0.52rem;color:var(--muted);margin-top:2px;">1-YEAR FIXED</div>
+          </div>
+          <div style="width:1px;background:var(--border);"></div>
+          <div style="text-align:center;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--teal);line-height:1;">3.60%</div>
+            <div style="font-size:0.52rem;color:var(--muted);margin-top:2px;">2-YEAR FIXED</div>
+          </div>
+        </div>
+        <div class="ad-cta">View Rates <span class="ad-cta-arrow">&rarr;</span></div>
+        <div class="ad-accent-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-connector">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">Click</div>
+  </div>
+
+  <!-- LANDING PAGE PREVIEW -->
+  <div class="lp-preview-wrap">
+    <div class="lp-preview">
+      <div class="lp-browser-bar">
+        <div class="lp-dot lp-dot-r"></div>
+        <div class="lp-dot lp-dot-y"></div>
+        <div class="lp-dot lp-dot-g"></div>
+        <div class="lp-url">monument.co/rates</div>
+      </div>
+      <div class="lp-mini">
+        <div class="lp-mini-nav">
+          <div class="lp-mini-logo">Monument</div>
+          <div class="lp-mini-nav-links">
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+          </div>
+        </div>
+        <div class="lp-mini-hero">
+          <div>
+            <div class="lp-mini-h1">Banking That<br><em>Knows Your Name</em></div>
+            <div class="lp-mini-sub">Personal service, premium rates, FSCS protected. No seven-figure minimum. Your relationship manager calls within 24 hours.</div>
+            <div class="lp-mini-btn">View Rates &rarr;</div>
+          </div>
+          <div class="lp-mini-card">
+            <div class="lp-mini-badge">Current Rates</div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">90-Day Notice</span>
+              <span class="lp-mini-rate-val">4.09%</span>
+            </div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">1-Year Fixed</span>
+              <span class="lp-mini-rate-val">3.85%</span>
+            </div>
+            <div class="lp-mini-rate">
+              <span class="lp-mini-rate-name">2-Year Fixed</span>
+              <span class="lp-mini-rate-val">3.60%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-tag">landing-page-aware.html</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<!-- STRATEGY NOTES -->
+<div style="background:var(--dark);border-top:1px solid var(--border);">
+  <div class="strategy-section">
+    <div class="strategy-header">
+      <div class="strategy-tag rv">Psychology Behind the Creative</div>
+      <h2 class="rv d1">Strategy Notes</h2>
+    </div>
+
+    <div class="strategy-grid">
+      <!-- STRATEGY 1 -->
+      <div class="strategy-card-wrap rv d1">
+        <div class="strategy-card">
+          <div class="strategy-num">01</div>
+          <span class="strategy-label label-comparison">Comparison</span>
+          <h3>Coutts vs Monument</h3>
+          <p>Anchoring bias. The viewer sees Coutts' million-pound barrier first. Monument's &pound;25,000 entry feels like a bargain by contrast. This is not about price. It is about making private banking feel accessible. The implicit message: you deserve this level of service, and someone finally removed the gate.</p>
+          <div class="metric">
+            <div class="metric-label">Primary Emotion</div>
+            <div class="metric-value">Frustration &rarr; Relief</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Expected CTR Driver</div>
+            <div class="metric-value">Curiosity gap + price anchor</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STRATEGY 2 -->
+      <div class="strategy-card-wrap rv d2">
+        <div class="strategy-card">
+          <div class="strategy-num">02</div>
+          <span class="strategy-label label-social-proof">Social Proof</span>
+          <h3>Trust Stack</h3>
+          <p>Three proof points in rapid succession: volume (&pound;7B), peer validation (Trustpilot 4.7), and authority (Best Savings Provider). Each addresses a different objection. The volume says "this is real." The stars say "people like you approve." The award says "experts agree." Stacking removes the need for the viewer to verify individually.</p>
+          <div class="metric">
+            <div class="metric-label">Primary Emotion</div>
+            <div class="metric-value">Uncertainty &rarr; Confidence</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Expected CTR Driver</div>
+            <div class="metric-value">Social validation cascade</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STRATEGY 3 -->
+      <div class="strategy-card-wrap rv d3">
+        <div class="strategy-card">
+          <div class="strategy-num">03</div>
+          <span class="strategy-label label-rate-led">Rate-Led</span>
+          <h3>Lead With the Number</h3>
+          <p>For the Aware audience comparing savings accounts, the rate is the conversation opener. 4.09% is the hook. But the differentiator is the line beneath: "Your relationship manager calls within 24 hours." Every competitor can quote a rate. Nobody else promises a named human on the phone tomorrow. The rate gets the click. The relationship manager gets the account.</p>
+          <div class="metric">
+            <div class="metric-label">Primary Emotion</div>
+            <div class="metric-value">Comparison &rarr; Decision</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Expected CTR Driver</div>
+            <div class="metric-value">Concrete number + service gap</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <p>Strategy &amp; creative direction by <span class="credit">Jean Mundabi Fala</span></p>
+</div>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

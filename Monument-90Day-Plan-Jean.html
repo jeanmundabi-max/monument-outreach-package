@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90-Day Growth Plan for Monument — Jean Mundabi Fala</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --navy: #0a1628;
+  --navy-mid: #111e35;
+  --navy-light: #162040;
+  --indigo: #514FEE;
+  --indigo-light: #6e6dff;
+  --indigo-soft: #EDECFD;
+  --mint: #d1fae5;
+  --mint-dark: #a7f3d0;
+  --gold: #fbbf24;
+  --accent: #dc2626;
+  --teal: #14b8a6;
+  --white: #ffffff;
+  --cream: #F7F5F0;
+  --off-white: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-400: #9ca3af;
+  --gray-600: #4b5563;
+  --gray-800: #1f2937;
+  --line: #E8E4DA;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+  height: 100vh; width: 100vw;
+}
+
+.deck { width: 100vw; height: 100vh; position: relative; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 56px 80px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+  overflow-y: auto;
+}
+.slide.active { opacity: 1; pointer-events: all; }
+
+.bg-navy { background: var(--navy); }
+.bg-mid { background: var(--navy-mid); }
+.bg-cream { background: var(--cream); color: var(--gray-800); }
+.bg-cream h1, .bg-cream h2, .bg-cream h3, .bg-cream h4 { color: var(--navy); }
+.bg-indigo-grad { background: linear-gradient(135deg, var(--navy) 0%, #1e2a4a 70%, var(--indigo) 100%); }
+.bg-mint { background: var(--mint); color: var(--navy); }
+.bg-mint h1, .bg-mint h2, .bg-mint h3, .bg-mint h4 { color: var(--navy); }
+
+/* Corner brand */
+.corner-logo {
+  position: fixed;
+  top: 24px; right: 36px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-weight: 800;
+  z-index: 100;
+  opacity: .85;
+}
+
+/* Progress + nav */
+.nav-bar {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 100px;
+  padding: 10px 20px;
+  z-index: 100;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.nav-bar button {
+  background: none; border: none; color: var(--white);
+  font-size: 18px; cursor: pointer; opacity: 0.7;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.nav-bar button:hover { opacity: 1; background: rgba(255,255,255,0.1); }
+.nav-bar .counter {
+  font-size: 11px;
+  font-family: monospace;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.7);
+  min-width: 50px; text-align: center;
+}
+.progress-track {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: rgba(255,255,255,0.1);
+  z-index: 99;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--gold), var(--indigo));
+  transition: width 0.3s;
+}
+
+/* Typography */
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.1;
+  margin-bottom: 14px;
+  font-weight: 400;
+}
+h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(24px, 3vw, 40px);
+  line-height: 1.15;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.tag {
+  display: inline-block;
+  background: var(--white);
+  color: var(--navy);
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.bg-cream .tag { background: var(--navy); color: var(--gold); }
+.bg-mint .tag { background: var(--navy); color: var(--gold); }
+
+.lead { font-size: 19px; line-height: 1.55; max-width: 760px; opacity: 0.85; margin-bottom: 18px; }
+.lead.dark { opacity: 0.9; color: var(--gray-600); }
+
+/* Generic content */
+.content-wrap { max-width: 1120px; width: 100%; }
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin: 32px 0;
+  width: 100%;
+}
+.stat-box {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 26px 22px;
+  text-align: left;
+}
+.bg-cream .stat-box { background: var(--white); border: 1px solid var(--line); }
+.stat-box .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 44px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -1px;
+}
+.bg-cream .stat-box .num { color: var(--indigo); }
+.stat-box .lab { font-size: 13px; color: rgba(255,255,255,0.65); font-weight: 500; }
+.bg-cream .stat-box .lab { color: var(--gray-600); }
+
+/* Lists */
+.bullets { max-width: 760px; }
+.bullets li {
+  list-style: none;
+  padding: 12px 0 12px 32px;
+  font-size: 18px;
+  position: relative;
+  color: rgba(255,255,255,0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.bg-cream .bullets li { color: var(--gray-800); border-bottom-color: var(--line); }
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 22px;
+  width: 16px; height: 1px;
+  background: var(--gold);
+}
+.bg-cream .bullets li::before { background: var(--indigo); }
+.bullets li strong { color: var(--white); }
+.bg-cream .bullets li strong { color: var(--navy); }
+.bullets li:last-child { border-bottom: none; }
+
+/* 4-step grid */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+}
+.step {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 28px 24px;
+  position: relative;
+}
+.bg-cream .step { background: var(--white); border-color: var(--line); }
+.step .num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 56px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+.bg-cream .step .num { color: var(--indigo); }
+.step h4 { font-size: 18px; margin-bottom: 6px; color: var(--white); }
+.bg-cream .step h4 { color: var(--navy); }
+.step p { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+.bg-cream .step p { color: var(--gray-600); }
+.step .out { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); font-weight: 700; }
+.bg-cream .step .out { color: var(--indigo); }
+
+/* Phase ladder */
+.ladder { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 24px 0; width: 100%; }
+.ladder-item { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 24px 22px; }
+.bg-cream .ladder-item { background: var(--white); border-color: var(--line); }
+.ladder-item .lab { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); font-weight: 800; margin-bottom: 8px; }
+.bg-cream .ladder-item .lab { color: var(--indigo); }
+.ladder-item h4 { font-size: 24px; font-family: 'DM Serif Display', serif; margin-bottom: 6px; color: var(--white); }
+.bg-cream .ladder-item h4 { color: var(--navy); }
+.ladder-item .price { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 8px; }
+.bg-cream .ladder-item .price { color: var(--gray-800); font-weight: 600; }
+.ladder-item p { font-size: 13px; color: rgba(255,255,255,0.65); }
+.bg-cream .ladder-item p { color: var(--gray-600); }
+
+/* Tables */
+.gtable { width: 100%; border-collapse: collapse; margin: 18px 0; max-width: 1000px; font-size: 14px; }
+.gtable th { background: rgba(255,255,255,0.06); padding: 14px 16px; text-align: left; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); border-bottom: 1px solid rgba(255,255,255,0.1); }
+.bg-cream .gtable th { background: var(--cream); color: var(--indigo); border-bottom-color: var(--line); }
+.gtable td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+.bg-cream .gtable td { color: var(--gray-800); border-bottom-color: var(--line); }
+.gtable td.num { text-align: right; font-weight: 700; color: var(--white); font-family: monospace; }
+.bg-cream .gtable td.num { color: var(--indigo); }
+.gtable .total td { background: rgba(81, 79, 238, 0.15); color: var(--white); font-weight: 800; }
+.bg-cream .gtable .total td { background: var(--indigo-soft); color: var(--navy); font-weight: 800; }
+
+/* Quote / Big block */
+.big-quote {
+  max-width: 920px;
+  text-align: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(28px, 3.5vw, 48px);
+  line-height: 1.25;
+  margin: 24px 0;
+}
+.big-quote .gold { color: var(--gold); }
+.big-quote.dark { color: var(--navy); }
+.big-quote.dark .gold { color: var(--indigo); }
+.attrib { font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 18px; }
+.bg-cream .attrib { color: var(--gray-600); }
+
+/* Methodology problem grid */
+.problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 24px 0; width: 100%; max-width: 1000px; }
+.prob-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 22px; }
+.bg-cream .prob-card { background: var(--white); border-color: var(--line); }
+.prob-card h4 { font-size: 16px; color: var(--accent); margin-bottom: 6px; }
+.prob-card p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.55; }
+.bg-cream .prob-card p { color: var(--gray-600); }
+
+/* Guarantee box (reused for "expect" box) */
+.guarantee-box {
+  background: var(--mint);
+  border-radius: 18px;
+  padding: 36px 40px;
+  max-width: 920px;
+  margin: 18px 0;
+  color: var(--navy);
+  text-align: left;
+}
+.guarantee-box h3 { color: var(--navy); margin-bottom: 14px; font-family: 'DM Serif Display', serif; }
+.guarantee-box p { font-size: 16px; line-height: 1.55; margin-bottom: 12px; }
+.guarantee-box .stips { font-size: 13px; color: var(--gray-800); }
+.guarantee-box .stips li { padding: 5px 0 5px 22px; position: relative; list-style: none; }
+.guarantee-box .stips li::before { content: '·'; position: absolute; left: 6px; font-weight: 900; color: var(--indigo); }
+
+/* Timeline weeks */
+.weeks { width: 100%; max-width: 1000px; margin: 18px 0; }
+.week-card {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 22px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 26px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+  color: var(--gray-800);
+}
+.week-card .wk { font-size: 11px; font-weight: 800; color: var(--indigo); text-transform: uppercase; letter-spacing: 0.12em; padding-top: 4px; }
+.week-card h4 { font-size: 17px; color: var(--navy); margin-bottom: 6px; }
+.week-card p { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+.week-card ul { list-style: none; padding: 0; margin-top: 4px; }
+.week-card ul li { font-size: 13px; color: var(--gray-700); padding: 2px 0 2px 14px; position: relative; }
+.week-card ul li::before { content: '·'; position: absolute; left: 0; color: var(--indigo); font-weight: 900; }
+
+/* Proof stat cards */
+.proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; width: 100%; }
+.proof-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 28px 24px; }
+.bg-cream .proof-card { background: var(--white); border-color: var(--line); }
+.proof-card .proof-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 36px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+.bg-cream .proof-card .proof-num { color: var(--indigo); }
+.proof-card h4 { font-size: 15px; margin-bottom: 6px; color: var(--white); }
+.bg-cream .proof-card h4 { color: var(--navy); }
+.proof-card p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+.bg-cream .proof-card p { color: var(--gray-600); }
+
+/* Diagnostic score bar */
+.score-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; width: 100%; max-width: 1000px; }
+.score-card { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 24px; text-align: center; }
+.score-card .score-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray-600); font-weight: 700; margin-bottom: 8px; }
+.score-card .score-val { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+.score-card .score-val.mid { color: var(--gold); }
+.score-card .score-desc { font-size: 12px; color: var(--gray-600); }
+
+/* Final CTA */
+.final-cta { text-align: center; }
+.final-cta .btn { display: inline-block; background: var(--indigo); color: var(--white); padding: 18px 36px; border-radius: 12px; text-decoration: none; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 24px; }
+
+/* Deliverable checklist */
+.del-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; width: 100%; max-width: 1000px; }
+.del-item { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; display: flex; align-items: flex-start; gap: 14px; }
+.del-item .check { color: var(--indigo); font-weight: 800; font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.del-item .del-text h4 { font-size: 15px; color: var(--navy); margin-bottom: 3px; }
+.del-item .del-text p { font-size: 12px; color: var(--gray-600); line-height: 1.45; }
+
+/* Mobile / Print */
+@media print {
+  body { overflow: visible; height: auto; }
+  .deck { width: auto; height: auto; }
+  .slide { position: relative; opacity: 1 !important; pointer-events: all !important; page-break-after: always; min-height: 100vh; }
+  .nav-bar, .progress-track, .corner-logo { display: none; }
+}
+@media (max-width: 880px) {
+  .slide { padding: 60px 24px; }
+  .ladder, .problem-grid, .proof-grid, .score-row, .del-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="corner-logo">Jean Mundabi Fala</div>
+
+<div class="progress-track"><div class="progress-bar" id="progress" style="width: 6.25%"></div></div>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 — COVER -->
+  <section class="slide bg-indigo-grad active">
+    <div class="content-wrap" style="text-align: center;">
+      <span class="tag">Prepared for Monument</span>
+      <h1>90-Day Growth Plan</h1>
+      <p class="lead" style="margin: 20px auto 28px; max-width: 720px;">How I would build Monument's growth marketing function from scratch, produce board-ready metrics, and create the acquisition infrastructure a pre-IPO demands.</p>
+      <div class="stat-row" style="max-width: 900px; margin: 36px auto;">
+        <div class="stat-box"><div class="num">90</div><div class="lab">Days to a functioning growth engine</div></div>
+        <div class="stat-box"><div class="num">5+</div><div class="lab">Acquisition channels built from zero</div></div>
+        <div class="stat-box"><div class="num">3/10</div><div class="lab">Current attraction score I diagnosed</div></div>
+        <div class="stat-box"><div class="num">2027</div><div class="lab">Nasdaq deadline driving the timeline</div></div>
+      </div>
+      <p class="attrib">Jean Mundabi Fala &middot; Growth Marketing Lead Candidate &middot; April 2026</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 — WHY I BUILT THIS -->
+  <section class="slide bg-navy">
+    <div class="content-wrap" style="text-align: center;">
+      <span class="tag">Why this exists</span>
+      <p class="big-quote">I did not send a CV. I built the plan <span class="gold">I would execute on day one.</span></p>
+      <p class="lead" style="margin: 24px auto; max-width: 680px;">Every data point in this deck is sourced from Monument's public filings, product pages, and competitive landscape. This is not a framework. It is an executable plan built from real research.</p>
+      <p class="attrib">If this is what I produce before I am hired, imagine what happens with data access, budget, and the team.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 — THE PROBLEM -->
+  <section class="slide bg-cream">
+    <div class="content-wrap">
+      <span class="tag">The challenge</span>
+      <h2>Monument has product-market fit. It does not have a growth system.</h2>
+      <p class="lead dark" style="margin-bottom: 24px;">Five billion pounds in deposits proves the product works. But the acquisition infrastructure that sustains this growth rate, and proves it to Nasdaq investors, does not exist yet.</p>
+      <div class="problem-grid">
+        <div class="prob-card"><h4>01 &middot; Single channel dependency</h4><p>Deposit acquisition runs through best buy tables and rate competitiveness. When a competitor offers 10 basis points more, those customers leave. There is no brand moat, no content flywheel, and no channel diversification.</p></div>
+        <div class="prob-card"><h4>02 &middot; No lifecycle marketing</h4><p>Thousands of depositors reach fixed rate maturity with no renewal sequence, no cross-sell into property lending, and no onboarding journey. Every maturity date is a retention risk with no system managing it.</p></div>
+        <div class="prob-card"><h4>03 &middot; No attribution or measurement</h4><p>Customer acquisition cost is unknown. Conversion rate by step is unmeasured. Channel return on investment cannot be reported. When the board asks "how do we sustain this growth rate," the answer is a narrative, not a number.</p></div>
+        <div class="prob-card"><h4>04 &middot; IPO without growth metrics</h4><p>pre-IPO trajectory requires documented, predictable acquisition. Investor presentations need CAC by channel, LTV by segment, cohort retention at maturity, and growth rate projections. The function that produces these does not exist.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 — DIAGNOSTIC SCORES -->
+  <section class="slide bg-cream">
+    <div class="content-wrap">
+      <span class="tag">Growth diagnostic</span>
+      <h2>I audited Monument's acquisition using the AAA framework.</h2>
+      <p class="lead dark" style="margin-bottom: 18px;">Attraction, Alignment, Activation. Three layers that determine whether a growth function can sustain deposit acquisition at IPO scale.</p>
+      <div class="score-row">
+        <div class="score-card"><div class="score-label">Attraction</div><div class="score-val">3/10</div><div class="score-desc">No paid channels. No SEO. No content. Single dependency on best buy tables.</div></div>
+        <div class="score-card"><div class="score-label">Alignment</div><div class="score-val mid">5/10</div><div class="score-desc">Product pages exist but no comparison content, no calculator tools, no social proof at conversion.</div></div>
+        <div class="score-card"><div class="score-label">Activation</div><div class="score-val mid">5/10</div><div class="score-desc">Digital platform and relationship managers exist. No lifecycle, no retention tracking, no cross-sell.</div></div>
+      </div>
+      <p class="attrib" style="margin-top: 22px;">Full diagnostic with signal-by-signal evidence available in the companion research package.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 — THE 3-PHASE PLAN OVERVIEW -->
+  <section class="slide bg-mid">
+    <div class="content-wrap">
+      <span class="tag">The plan</span>
+      <h2>Three phases. Twelve weeks. Measurable output from week one.</h2>
+      <p class="lead" style="margin-bottom: 22px;">Each phase builds on the last. Nothing is theoretical. Every deliverable has a deadline and a measurement criterion.</p>
+      <div class="ladder">
+        <div class="ladder-item">
+          <div class="lab">Phase 1 &middot; Weeks 1 to 4</div>
+          <h4>Foundation</h4>
+          <p>Install analytics and attribution. Map the application flow. Build the first comparison page. Launch rate alert email capture. Establish baselines before spending a pound on paid channels.</p>
+        </div>
+        <div class="ladder-item">
+          <div class="lab">Phase 2 &middot; Weeks 5 to 8</div>
+          <h4>Paid Channels and Lifecycle</h4>
+          <p>Launch Google Ads and LinkedIn targeting mass affluent savers. Publish first SEO content. Run the first CRO experiment. Activate lifecycle sequences for deposit maturity.</p>
+        </div>
+        <div class="ladder-item">
+          <div class="lab">Phase 3 &middot; Weeks 9 to 12</div>
+          <h4>Optimisation and Reporting</h4>
+          <p>Review paid data. Kill underperformers. Launch referral and IFA programmes. Deliver the first board-ready growth report with IPO metrics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 — PHASE 1 DETAIL -->
+  <section class="slide bg-cream">
+    <div class="content-wrap">
+      <span class="tag">Phase 1 &middot; Weeks 1 to 4</span>
+      <h2>Foundation and quick wins.</h2>
+      <p class="lead dark" style="margin-bottom: 18px;">Data before campaigns. Measurement before spend. The first 30 days produce the infrastructure everything else depends on.</p>
+      <div class="weeks">
+        <div class="week-card"><div class="wk">Week 1</div><div><h4>Analytics and Attribution</h4><ul><li>Install full analytics stack and attribution model</li><li>Map current deposit acquisition sources</li><li>Define CAC, LTV, and cohort retention baselines</li><li>At BT, I built this single source of truth from scratch. Marketing, Finance, and Commercial now use it for every investment decision</li></ul></div></div>
+        <div class="week-card"><div class="wk">Week 2</div><div><h4>Application Flow Audit</h4><ul><li>Map every step from landing page to funded deposit</li><li>Identify friction points and drop-offs per step</li><li>Measure current conversion rate at each stage</li><li>At Santander, this type of audit produced a 20% conversion improvement</li></ul></div></div>
+        <div class="week-card"><div class="wk">Week 3</div><div><h4>First Comparison Page</h4><ul><li>"Monument vs Coutts" targeting mass affluent savers who feel too small for private banking</li><li>High intent search term with zero competitor content</li><li>Monument's exact audience: £250,000 plus, underserved by both ends of the market</li></ul></div></div>
+        <div class="week-card"><div class="wk">Week 4</div><div><h4>Lead Capture Launch</h4><ul><li>Savings calculator live on product pages</li><li>Rate alert email capture: "Get notified when our rates change"</li><li>First leads entering nurture sequences</li><li>Lowest friction conversion path for visitors not ready to apply</li></ul></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 — PHASE 2 DETAIL -->
+  <section class="slide bg-navy">
+    <div class="content-wrap">
+      <span class="tag">Phase 2 &middot; Weeks 5 to 8</span>
+      <h2>Paid channels and lifecycle marketing.</h2>
+      <p class="lead" style="margin-bottom: 18px;">With baselines established, spend becomes measurable from day one. Every pound tracked from click to funded deposit.</p>
+      <div class="steps" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="step"><div class="num">05</div><h4>Google Ads Launch</h4><p>Paid search on "best savings account UK," "high interest fixed rate savings," "mass affluent savings FSCS protected." Budget: £5,000 to £10,000 per month. Full tracking on cost per application.</p><div class="out">At Santander, I managed £30 to 40 million across paid channels and reduced CAC by 15%</div></div>
+        <div class="step"><div class="num">06</div><h4>LinkedIn Ads and SEO</h4><p>LinkedIn targeting high earners, property investors, business owners with £250,000 plus investable assets. First 4 SEO articles published targeting mass affluent savings searches.</p><div class="out">The £30 million Santander pipeline used this exact channel and audience</div></div>
+        <div class="step"><div class="num">07</div><h4>First CRO Experiment</h4><p>A/B test product page headline, social proof placement (the £5 billion in deposits badge), and form fields in the application flow. First experiment with baseline conversion rate.</p><div class="out">Structured experimentation, not random changes</div></div>
+        <div class="step"><div class="num">08</div><h4>Lifecycle Sequences Live</h4><p>Maturity approaching sequence (60, 30, 14 days before fixed rate matures). Renewal offer with cross-sell into lending products. Depositor onboarding sequence.</p><div class="out">At BT, contact centre diagnosis led to 11% retention improvement</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8 — PHASE 3 DETAIL -->
+  <section class="slide bg-cream">
+    <div class="content-wrap">
+      <span class="tag">Phase 3 &middot; Weeks 9 to 12</span>
+      <h2>Optimisation and board reporting.</h2>
+      <p class="lead dark" style="margin-bottom: 18px;">By week 9, real data exists. This phase is about reading that data, doubling down on what works, and producing the growth report the board and future investors need.</p>
+      <div class="weeks">
+        <div class="week-card"><div class="wk">Week 9</div><div><h4>30-Day Paid Channel Review</h4><ul><li>Review Google Ads and LinkedIn performance data</li><li>Kill underperforming audiences and scale winners</li><li>Optimise landing pages based on CRO test results</li><li>This is the weekly trading session I already run at BT</li></ul></div></div>
+        <div class="week-card"><div class="wk">Week 10</div><div><h4>Referral Programme Launch</h4><ul><li>Depositor referral with rate bonus or cash incentive</li><li>Target existing depositors through email and app notification</li><li>Thousands of satisfied depositors already exist. This will be the lowest CAC channel</li></ul></div></div>
+        <div class="week-card"><div class="wk">Week 11</div><div><h4>IFA Partnership Programme</h4><ul><li>Identify top 20 Independent Financial Advisors serving mass affluent clients</li><li>Create referral commission structure and co-marketing collateral</li><li>New distribution channel with built-in trust</li></ul></div></div>
+        <div class="week-card"><div class="wk">Week 12</div><div><h4>Board-Ready Growth Report</h4><ul><li>CAC by channel, application completion rate, CRO results</li><li>Lifecycle impact on retention, referral programme performance</li><li>IPO metrics dashboard: the data Nasdaq investors will scrutinise</li><li>I produce this exact report every week at BT</li></ul></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9 — AUTHORITY ENGINE -->
+  <section class="slide bg-mid">
+    <div class="content-wrap">
+      <span class="tag">Beyond paid acquisition</span>
+      <h2>The Authority Engine — Content That Compounds</h2>
+      <p class="lead" style="margin-bottom: 22px;">Paid channels acquire depositors. The Authority Engine retains them and attracts new ones without spend.</p>
+      <div class="steps" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="step"><div class="num">1</div><h4>LinkedIn Content Strategy</h4><p>Weekly posts from Monument leadership targeting high earners, property investors, and professionals. Content about savings strategy for high earners, why FSCS matters above 85,000 pounds, the gap between high street and private banking. Not promotional. Educational. Builds trust before the deposit decision.</p><div class="out">Content compounds. Paid stops the moment the budget stops.</div></div>
+        <div class="step"><div class="num">2</div><h4>Signal-Based Connection</h4><p>Use LinkedIn signals to identify likely depositors: job title (Director and above, Partner, Founder), industry (law, finance, consulting, property), location (London, South East England), activity (engaging with savings and investment content). Connect with them. Let the content do the selling.</p><div class="out">Every depositor Monument needs is identifiable before they visit the website</div></div>
+        <div class="step"><div class="num">3</div><h4>Email Nurture (20-Week)</h4><p>Rate alerts, savings guides, market commentary. For people who visited the website but did not deposit. Value only, no hard sell. When they are ready, Monument is the name they remember.</p><div class="out">95% of visitors are not ready today. Nurture captures the ones who will be ready in 3, 6, 12 months.</div></div>
+        <div class="step"><div class="num">4</div><h4>Retargeting Layer</h4><p>5 to 10 pounds per day on Meta and LinkedIn retargeting website visitors. Keeps Monument visible between the first visit and the deposit decision, which can take weeks for 25,000 pound plus decisions.</p><div class="out">Lowest cost channel. Highest intent audience. Already visited, just not ready yet.</div></div>
+      </div>
+      <p class="attrib" style="margin-top: 22px;">This is what turns rate-driven depositors into brand-driven depositors. Brand depositors do not churn at maturity.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 — LINKEDIN SIGNAL TARGETING -->
+  <section class="slide bg-cream">
+    <div class="content-wrap">
+      <span class="tag">Signal-based growth</span>
+      <h2>LinkedIn Signal Targeting — How We Find Depositors</h2>
+      <p class="lead dark" style="margin-bottom: 18px;">Every depositor Monument needs is identifiable before they ever visit the website.</p>
+      <table class="gtable">
+        <thead>
+          <tr><th>Signal</th><th>Where To Find It</th><th>What It Tells Us</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Job title: Director, Partner, VP, Founder</td><td>LinkedIn profile</td><td>Income level likely 100,000 pounds plus (savings capacity)</td></tr>
+          <tr><td>Property ownership: buy to let, development</td><td>Companies House, LinkedIn activity</td><td>Active investor, needs savings alongside lending</td></tr>
+          <tr><td>Industry: Law, Finance, Consulting, Medicine</td><td>LinkedIn industry filter</td><td>High earning professional segments</td></tr>
+          <tr><td>Location: London, SE England, major cities</td><td>LinkedIn location</td><td>UK depositor eligibility</td></tr>
+          <tr><td>Content engagement: savings, investment, rates</td><td>LinkedIn activity</td><td>Active interest in financial decisions</td></tr>
+          <tr><td>Recently changed jobs to senior role</td><td>LinkedIn job change signal</td><td>Likely received equity or bonus, needs savings vehicle</td></tr>
+        </tbody>
+      </table>
+      <div class="guarantee-box" style="margin-top: 24px;">
+        <h3>This is not cold outreach to consumers.</h3>
+        <p>This is organic content paired with strategic connections targeting people whose public profile indicates savings capacity. Monument's content appears in their feed. When they need a savings account, they already know the name.</p>
+        <p>At Santander, this exact signal-based approach generated 30 million pounds in Private Banking pipeline in 30 days. 38 new clients from targeted LinkedIn signals. The same methodology, applied to mass affluent savers instead of high net worth individuals.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 — PROOF (was 9) -->
+  <section class="slide bg-navy">
+    <div class="content-wrap">
+      <span class="tag">Proof I have done this before</span>
+      <h2>Three results. All verified. All relevant to Monument.</h2>
+      <p class="lead" style="margin-bottom: 22px;">Mass affluent deposit acquisition is the same challenge I have solved at Santander and BT, at a different wealth tier and product type.</p>
+      <div class="proof-grid">
+        <div class="proof-card">
+          <div class="proof-num">£30M</div>
+          <h4>Santander Private Banking Pipeline</h4>
+          <p>Hyper-targeted LinkedIn campaign identifying HNWI behavioural signals. 38 new High Net Worth clients in 30 days. 7x the results of the previous approach. FCA regulated environment.</p>
+        </div>
+        <div class="proof-card">
+          <div class="proof-num">15%</div>
+          <h4>BT SMB Revenue Growth</h4>
+          <p>Systematic multi-channel campaign optimisation. 25% lead acquisition improvement. Built single source of truth now used by Marketing, Finance, and Commercial for investment decisions.</p>
+        </div>
+        <div class="proof-card">
+          <div class="proof-num">£260K</div>
+          <h4>Annual CAC Savings at Santander</h4>
+          <p>15% reduction across paid media channels. £30 to 40 million marketing budget managed. Championed econometrics for budget allocation. 20% conversion improvement on current account repositioning.</p>
+        </div>
+      </div>
+      <p class="attrib" style="margin-top: 18px;">Additional: 11% customer resign rate improvement at BT (from contact centre diagnosis). Tiger team created (Marketing, Commercial, Finance). Weekly trading sessions to senior leadership.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 12 — WHY THIS EXPERIENCE MAPS -->
+  <section class="slide bg-mid">
+    <div class="content-wrap">
+      <span class="tag">Why it maps</span>
+      <h2>The Santander HNWI campaign is Monument's playbook one tier down.</h2>
+      <p class="lead" style="margin-bottom: 22px;">Mass affluent deposit acquisition and HNWI private banking acquisition share the same psychology. They compare. They require trust signals. They expect personal service. They ignore mass market playbooks.</p>
+      <table class="gtable">
+        <thead>
+          <tr><th>Capability the JD Requires</th><th>My Direct Experience</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Build growth function from scratch</td><td>Built single source of truth from scratch at BT. Now used across 3 departments</td></tr>
+          <tr><td>Performance marketing and paid channels</td><td>Managed £30 to 40 million at Santander. 15% SMB revenue growth at BT</td></tr>
+          <tr><td>Lifecycle marketing and CRM</td><td>11% customer resign rate improvement at BT. 20% conversion improvement at Santander</td></tr>
+          <tr><td>Experimentation and test-and-learn</td><td>Championed econometrics at Santander. Weekly data-driven trading sessions at BT</td></tr>
+          <tr><td>CAC, LTV, conversion reporting</td><td>£260,000 annual CAC savings. Own volume/value outlooks at BT</td></tr>
+          <tr><td>Cross-functional coordination</td><td>Created permanent tiger team at BT (Marketing, Commercial, Finance)</td></tr>
+          <tr><td>Regulated environment (FCA)</td><td>2 plus years at Santander. Every campaign through FCA compliance review</td></tr>
+          <tr><td>Board-level reporting</td><td>Lead weekly trading sessions. Own quarterly planning and performance vs plan</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SLIDE 13 — WHAT MONUMENT GETS -->
+  <section class="slide bg-cream">
+    <div class="content-wrap">
+      <span class="tag">What I will deliver</span>
+      <h2>Tangible deliverables, not activity reports.</h2>
+      <p class="lead dark" style="margin-bottom: 18px;">Everything I build in 90 days stays with Monument permanently. These are assets, not consultations.</p>
+      <div class="del-grid">
+        <div class="del-item"><div class="check">1</div><div class="del-text"><h4>Attribution Dashboard</h4><p>Full analytics stack mapping every deposit to its source. CAC by channel. LTV by segment. The single source of truth for growth decisions.</p></div></div>
+        <div class="del-item"><div class="check">2</div><div class="del-text"><h4>Comparison Pages</h4><p>"Monument vs Coutts" and "Monument vs HSBC Premier." SEO-optimised content owning the high-intent searches mass affluent savers use when comparing.</p></div></div>
+        <div class="del-item"><div class="check">3</div><div class="del-text"><h4>Paid Campaigns (Live)</h4><p>Google Ads and LinkedIn Ads producing qualified deposit applications with tracked cost per acquisition. Budget-accountable from day one.</p></div></div>
+        <div class="del-item"><div class="check">4</div><div class="del-text"><h4>Lifecycle Sequences</h4><p>Maturity renewal (60/30/14 days), depositor onboarding, and cross-sell into property lending. Every life-stage of a depositor mapped and automated.</p></div></div>
+        <div class="del-item"><div class="check">5</div><div class="del-text"><h4>CRO Programme</h4><p>Systematic experimentation on application flow, landing pages, social proof placement. 3 to 5 tests per month cadence established.</p></div></div>
+        <div class="del-item"><div class="check">6</div><div class="del-text"><h4>Referral Programme</h4><p>Depositor referral with rate bonus. Leveraging thousands of existing satisfied customers. Designed to become the lowest CAC channel.</p></div></div>
+        <div class="del-item"><div class="check">7</div><div class="del-text"><h4>IFA Partnership Framework</h4><p>Commission structure and co-marketing collateral for top 20 Independent Financial Advisors serving mass affluent clients.</p></div></div>
+        <div class="del-item"><div class="check">8</div><div class="del-text"><h4>Board-Ready Growth Report</h4><p>IPO-grade metrics dashboard. CAC, LTV, cohort retention, channel ROI, growth projections. The data Nasdaq investors will examine.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 14 — BEFORE / AFTER -->
+  <section class="slide bg-navy">
+    <div class="content-wrap">
+      <span class="tag">The transformation</span>
+      <h2>What the board sees after 90 days.</h2>
+      <p class="lead" style="margin-bottom: 18px;">The difference between hiring someone who needs 12 to 18 months to build from scratch and someone who has done this before.</p>
+      <table class="gtable">
+        <thead>
+          <tr><th>Metric</th><th>Before (Today)</th><th>After 90 Days</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Customer Acquisition Cost</td><td>Unknown (no tracking)</td><td>Tracked by channel with optimisation targets</td></tr>
+          <tr><td>Acquisition Channels</td><td>1 (best buy tables)</td><td>5+ (paid search, paid social, SEO, referral, IFA)</td></tr>
+          <tr><td>Application Completion Rate</td><td>Unknown</td><td>Measured and improving through CRO</td></tr>
+          <tr><td>Cohort Retention at Maturity</td><td>Unknown</td><td>Tracked with renewal sequences active</td></tr>
+          <tr><td>Lifecycle Marketing</td><td>None</td><td>Maturity, onboarding, cross-sell sequences live</td></tr>
+          <tr><td>Growth Reporting</td><td>None</td><td>Weekly reviews. Monthly board reports</td></tr>
+          <tr><td>Experimentation Velocity</td><td>Zero tests</td><td>3 to 5 experiments per month</td></tr>
+          <tr><td>IPO Growth Metrics</td><td>Not available</td><td>Dashboard operational with real data</td></tr>
+        </tbody>
+      </table>
+      <p class="lead" style="margin-top: 22px; color: var(--gold); font-weight: 600;">The board sees data in 90 days, not a plan in 90 days.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 15 — WHAT YOU CAN EXPECT -->
+  <section class="slide bg-mint">
+    <div class="content-wrap" style="text-align: center;">
+      <span class="tag">What you can expect</span>
+      <h2>After 90 days, four things will be true.</h2>
+      <div class="stat-row" style="max-width: 1000px; margin: 36px auto;">
+        <div class="stat-box" style="background: var(--white); border-color: var(--line);"><div class="num" style="color: var(--indigo);">CAC</div><div class="lab" style="color: var(--gray-600);">Customer acquisition cost tracked by channel and optimising monthly. The number the IPO roadshow requires.</div></div>
+        <div class="stat-box" style="background: var(--white); border-color: var(--line);"><div class="num" style="color: var(--indigo);">Cohorts</div><div class="lab" style="color: var(--gray-600);">Deposit retention tracked at maturity. Renewal sequences reducing churn before the fixed rate expires.</div></div>
+        <div class="stat-box" style="background: var(--white); border-color: var(--line);"><div class="num" style="color: var(--indigo);">Pipeline</div><div class="lab" style="color: var(--gray-600);">First deposit applications from paid channels with full attribution. Proof that acquisition works beyond best buy tables.</div></div>
+        <div class="stat-box" style="background: var(--white); border-color: var(--line);"><div class="num" style="color: var(--indigo);">Report</div><div class="lab" style="color: var(--gray-600);">Board-ready growth dashboard operational. CAC, LTV, conversion, retention, and channel performance in one view.</div></div>
+      </div>
+      <p style="font-size: 14px; color: var(--gray-600); max-width: 680px; margin: 0 auto;">These are the outputs, not promises. Each one has a week number attached to it in the plan above. I hold myself accountable to the timeline because I have delivered this timeline before.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 16 — FINAL CTA -->
+  <section class="slide bg-indigo-grad">
+    <div class="content-wrap final-cta">
+      <span class="tag">Next step</span>
+      <h1 style="margin-bottom: 28px;">15 minutes. The 90-day plan in detail.</h1>
+      <p class="lead" style="margin: 0 auto 18px; max-width: 680px;">I will walk you through the diagnostic findings, the phase-by-phase execution, and exactly how I would build Monument's growth function. No slides needed. I have already built them.</p>
+      <p class="lead" style="margin: 0 auto 32px; max-width: 680px; font-size: 16px; opacity: 0.7;">Monument has the product (£5 billion in deposits proves it), the leadership (Ian Rand, ex Barclays, ex JP Morgan), the funding (£200 million), and the trajectory (Future Fifty, pre-IPO trajectory). The growth function to turn all of that into documented, measurable acquisition is the missing piece.</p>
+      <a href="https://cal.com/jean-m-8f4kbr/15min" class="btn" target="_blank">Book 15 Minutes to Discuss</a>
+      <p class="attrib" style="margin-top: 38px;">Jean Mundabi Fala &middot; jeanmundabi@gmail.com &middot; linkedin.com/in/jeanmundabi</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="nav-bar">
+  <button onclick="go(-1)" aria-label="Previous">&lsaquo;</button>
+  <span class="counter" id="counter">1 / 16</span>
+  <button onclick="go(1)" aria-label="Next">&rsaquo;</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let idx = 0;
+function show(n) {
+  idx = Math.max(0, Math.min(total - 1, n));
+  slides.forEach((s,i) => s.classList.toggle('active', i === idx));
+  document.getElementById('counter').textContent = (idx+1) + ' / ' + total;
+  document.getElementById('progress').style.width = ((idx+1)/total*100) + '%';
+}
+function go(d) { show(idx + d); }
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') go(1);
+  if (e.key === 'ArrowLeft') go(-1);
+});
+show(0);
+</script>
+
+</body>
+</html>

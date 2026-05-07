@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monument Ad Creative — Unaware Audience</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --deep: #0c1220;
+  --dark: #141b2d;
+  --card: #1a2236;
+  --border: rgba(255,255,255,0.08);
+  --teal: #36737a;
+  --teal-deep: #2a5a60;
+  --teal-glow: rgba(54,115,122,0.3);
+  --gold: #c4a265;
+  --gold-glow: rgba(196,162,101,0.2);
+  --white: #ffffff;
+  --muted: rgba(255,255,255,0.55);
+  --light: rgba(255,255,255,0.85);
+  --green: #00b67a;
+  --amber: #f59e0b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 18px; scroll-behavior: smooth; background: var(--deep); }
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--light);
+  background: var(--deep);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* REVEAL */
+.rv { opacity: 0; transform: translateY(28px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+.rv.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+/* HEADER */
+.page-header {
+  background: var(--deep);
+  padding: 80px 60px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(circle, var(--gold-glow) 0%, transparent 65%);
+  pointer-events: none;
+  opacity: 0.3;
+}
+.page-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 50px;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.25);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.page-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+.page-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.page-header h1 em { font-style: italic; color: var(--gold); }
+.page-subtitle {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* CONTENT */
+.content { max-width: 1200px; margin: 0 auto; padding: 60px 40px 80px; }
+
+/* JOURNEY ROW */
+.journey-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  align-items: center;
+  margin-bottom: 72px;
+}
+
+/* AD CREATIVE CARD */
+.ad-creative-wrap {
+  background: linear-gradient(180deg, var(--gold), transparent 40%, var(--gold));
+  border-radius: 21px;
+  padding: 1px;
+}
+.ad-creative {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 50px -10px var(--gold-glow);
+}
+.ad-creative-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.ad-platform {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ad-platform-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--white);
+}
+.ad-platform-icon.meta { background: #1877f2; }
+.ad-platform-icon.linkedin { background: #0a66c2; }
+.ad-platform-icon.google { background: #4285f4; }
+.ad-platform-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--light);
+  letter-spacing: 0.3px;
+}
+.ad-sponsor-tag {
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+.ad-label-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 50px;
+  background: rgba(245,158,11,0.12);
+  color: var(--amber);
+}
+
+/* AD BODY */
+.ad-body {
+  padding: 32px 28px 28px;
+  position: relative;
+  background: var(--deep);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.ad-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.06;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 30px,
+    rgba(196,162,101,0.15) 30px,
+    rgba(196,162,101,0.15) 31px
+  );
+  pointer-events: none;
+}
+
+/* NO BRAND MARK FOR UNAWARE */
+.ad-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+.ad-headline strong {
+  color: var(--teal);
+  font-weight: 600;
+}
+.ad-headline .gold {
+  color: var(--gold);
+}
+
+.ad-subtext {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* TRUSTPILOT */
+.ad-trustpilot {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(0, 182, 122, 0.08);
+  border: 1px solid rgba(0, 182, 122, 0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.tp-stars { display: flex; gap: 2px; }
+.tp-star {
+  width: 18px;
+  height: 18px;
+  background: var(--green);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+.tp-star-half {
+  background: linear-gradient(90deg, var(--green) 50%, rgba(255,255,255,0.15) 50%);
+}
+.tp-text {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--green);
+}
+.tp-count {
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+/* AD CTA */
+.ad-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--deep);
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-decoration: none;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.ad-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255,255,255,0.12);
+}
+.ad-cta-arrow { font-size: 0.9rem; }
+
+/* DECORATIVE */
+.ad-accent-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--teal), var(--gold));
+}
+.ad-accent-corner {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+  opacity: 0.3;
+  border-radius: 0 8px 0 0;
+  z-index: 1;
+}
+.ad-accent-corner-bl {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-bottom: 2px solid var(--teal);
+  border-left: 2px solid var(--teal);
+  opacity: 0.2;
+  border-radius: 0 0 0 8px;
+  z-index: 1;
+}
+.ad-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+/* PAIN HIGHLIGHT */
+.pain-highlight {
+  padding: 16px 20px;
+  background: rgba(196,162,101,0.06);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.pain-highlight p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--light);
+  line-height: 1.4;
+}
+
+/* GAP VISUAL */
+.gap-visual {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+.gap-end {
+  text-align: center;
+  flex-shrink: 0;
+}
+.gap-end-label {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.gap-end-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.gap-end-value.low { color: var(--muted); }
+.gap-end-value.high { color: var(--gold); }
+.gap-end-value.mid { color: var(--teal); }
+.gap-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), var(--gold), rgba(255,255,255,0.1));
+  position: relative;
+}
+.gap-line::after {
+  content: '?';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: var(--card);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* ARROW CONNECTOR */
+.arrow-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  position: relative;
+}
+.arrow-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--teal));
+  position: relative;
+}
+.arrow-line::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -5px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid var(--teal);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.arrow-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* LANDING PAGE PREVIEW */
+.lp-preview-wrap {
+  background: linear-gradient(180deg, rgba(54,115,122,0.4), transparent 40%, rgba(54,115,122,0.2));
+  border-radius: 17px;
+  padding: 1px;
+}
+.lp-preview {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 40px -10px var(--teal-glow);
+}
+.lp-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+}
+.lp-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.lp-dot-r { background: #ef4444; }
+.lp-dot-y { background: #f59e0b; }
+.lp-dot-g { background: #22c55e; }
+.lp-url {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.58rem;
+  color: var(--muted);
+  font-family: 'DM Sans', monospace;
+  margin-left: 8px;
+}
+
+/* MINI LANDING PAGE (UNAWARE) */
+.lp-mini {
+  padding: 24px 20px;
+  background: var(--deep);
+  min-height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+.lp-mini::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--teal-glow) 0%, transparent 65%);
+  pointer-events: none;
+  opacity: 0.3;
+}
+.lp-mini-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.lp-mini-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.lp-mini-nav-links { display: flex; gap: 8px; }
+.lp-mini-nav-link {
+  width: 28px;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 2px;
+}
+.lp-mini-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.lp-mini-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.25;
+}
+.lp-mini-h1 em { font-style: italic; color: var(--teal); }
+.lp-mini-sub {
+  font-size: 0.52rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.lp-mini-btn {
+  display: inline-block;
+  background: var(--white);
+  color: var(--deep);
+  padding: 4px 14px;
+  border-radius: 50px;
+  font-size: 0.5rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+.lp-mini-pain-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+.lp-mini-pain-card {
+  background: var(--card);
+  border-radius: 6px;
+  padding: 8px 6px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.lp-mini-pain-icon { font-size: 0.9rem; margin-bottom: 4px; }
+.lp-mini-pain-text {
+  font-size: 0.4rem;
+  color: var(--muted);
+  line-height: 1.3;
+}
+.lp-mini-quote {
+  background: rgba(196,162,101,0.06);
+  border-left: 2px solid var(--gold);
+  padding: 8px 10px;
+  margin-top: 12px;
+  border-radius: 0 6px 6px 0;
+}
+.lp-mini-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.5rem;
+  font-style: italic;
+  color: var(--light);
+  line-height: 1.4;
+}
+
+.lp-tag {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.58rem;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-top: 1px solid var(--border);
+}
+
+/* AD NUMBER */
+.journey-number {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.journey-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 40px var(--gold-glow);
+  opacity: 0.6;
+}
+.journey-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.journey-angle {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.journey-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* STRATEGY NOTES */
+.strategy-section {
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.strategy-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.strategy-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.strategy-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.2;
+}
+.strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.strategy-card-wrap {
+  background: linear-gradient(180deg, var(--gold), transparent 50%, var(--gold));
+  border-radius: 17px;
+  padding: 1px;
+}
+.strategy-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 36px 28px;
+  height: 100%;
+}
+.strategy-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.strategy-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.strategy-label {
+  display: inline-block;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 50px;
+  margin-bottom: 14px;
+}
+.label-pain {
+  background: rgba(239,68,68,0.1);
+  color: #f87171;
+}
+.label-aspiration {
+  background: rgba(196,162,101,0.12);
+  color: var(--gold);
+}
+.label-education {
+  background: rgba(54,115,122,0.15);
+  color: var(--teal);
+}
+.strategy-card p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.strategy-card .metric {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.metric-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.metric-value.pain { color: #f87171; }
+.metric-value.gold { color: var(--gold); }
+.metric-value.teal { color: var(--teal); }
+
+/* FOOTER */
+.page-footer {
+  text-align: center;
+  padding: 40px;
+  border-top: 1px solid var(--border);
+}
+.page-footer p {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.page-footer .credit {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* KEY PRINCIPLE */
+.key-principle {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+.principle-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 40px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+.principle-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.principle-text h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.principle-text p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .journey-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .arrow-connector {
+    transform: rotate(90deg);
+    padding: 12px 0;
+  }
+  .strategy-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .content { padding: 40px 20px 60px; }
+  .page-header { padding: 60px 24px 40px; }
+  .gap-visual { flex-direction: column; }
+  .gap-line { width: 100%; height: 2px; }
+  .lp-mini-pain-cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="rv">
+    <div class="page-badge">Unaware Audience</div>
+  </div>
+  <h1 class="rv d1">Monument Ad Creative<br><em>Unaware Audience</em></h1>
+  <p class="page-subtitle rv d2">Brand is hidden until the landing page. These prospects do not know Monument exists. The ads lead with pain, aspiration, and education to earn the click before revealing the product.</p>
+</div>
+
+<!-- KEY PRINCIPLE -->
+<div class="key-principle rv" style="padding-top:48px;">
+  <div class="principle-card">
+    <div class="principle-icon">&#128683;</div>
+    <div class="principle-text">
+      <h3>No Brand. No Logo. No "Monument."</h3>
+      <p>Unaware audiences scroll past branded ads because the name means nothing to them yet. These creatives sell the problem and the gap. Monument is revealed only after the click, when the landing page earns the introduction through context, proof, and relevance.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- AD 1: PAIN-LED -->
+<div class="journey-number rv">
+  <div class="journey-num">01</div>
+  <div class="journey-title">
+    <span class="journey-angle">Pain-Led Angle</span>
+    <span class="journey-desc">Name the exact situation. Make them feel seen.</span>
+  </div>
+</div>
+
+<div class="journey-row rv d1">
+  <!-- AD CREATIVE -->
+  <div class="ad-creative-wrap">
+    <div class="ad-creative">
+      <div class="ad-creative-header">
+        <div class="ad-platform">
+          <div class="ad-platform-icon meta">f</div>
+          <div>
+            <div class="ad-platform-name">Financial Insights</div>
+            <div class="ad-sponsor-tag">Sponsored</div>
+          </div>
+        </div>
+        <div class="ad-label-tag">Pain-Led</div>
+      </div>
+      <div class="ad-body">
+        <div class="ad-glow" style="top:-40px;left:-40px;background:rgba(239,68,68,0.1);"></div>
+        <div class="ad-glow" style="bottom:-60px;right:-40px;background:var(--gold-glow);"></div>
+        <div class="ad-accent-corner"></div>
+        <div class="ad-accent-corner-bl"></div>
+
+        <div class="ad-headline">You have <span class="gold">&pound;250,000</span> in savings.</div>
+        <div class="pain-highlight">
+          <p>Your bank pays you 1.5% and a call centre.</p>
+        </div>
+        <div class="ad-subtext">There is a difference between storing money and growing it. Between an account number and a name.</div>
+        <div class="ad-cta">See What Is Different <span class="ad-cta-arrow">&rarr;</span></div>
+        <div class="ad-accent-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-connector">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">Click</div>
+  </div>
+
+  <!-- LANDING PAGE PREVIEW -->
+  <div class="lp-preview-wrap">
+    <div class="lp-preview">
+      <div class="lp-browser-bar">
+        <div class="lp-dot lp-dot-r"></div>
+        <div class="lp-dot lp-dot-y"></div>
+        <div class="lp-dot lp-dot-g"></div>
+        <div class="lp-url">monument.co/better-banking</div>
+      </div>
+      <div class="lp-mini">
+        <div class="lp-mini-nav">
+          <div class="lp-mini-logo">Monument</div>
+          <div class="lp-mini-nav-links">
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+          </div>
+        </div>
+        <div class="lp-mini-hero">
+          <div class="lp-mini-h1">Your Money Deserves<br><em>More Than a Call Centre</em></div>
+          <div class="lp-mini-sub">You have worked for decades to build wealth. Is a chatbot really the best your bank can offer? There is another way.</div>
+          <div class="lp-mini-btn">See What Is Different &rarr;</div>
+          <div class="lp-mini-pain-cards">
+            <div class="lp-mini-pain-card">
+              <div class="lp-mini-pain-icon">&#128222;</div>
+              <div class="lp-mini-pain-text">Call centre<br>hold queues</div>
+            </div>
+            <div class="lp-mini-pain-card">
+              <div class="lp-mini-pain-icon">&#128200;</div>
+              <div class="lp-mini-pain-text">1.5% while<br>inflation eats it</div>
+            </div>
+            <div class="lp-mini-pain-card">
+              <div class="lp-mini-pain-icon">&#128100;</div>
+              <div class="lp-mini-pain-text">No name.<br>Just a number.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-tag">landing-page-unaware.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- AD 2: ASPIRATION-LED -->
+<div class="journey-number rv">
+  <div class="journey-num">02</div>
+  <div class="journey-title">
+    <span class="journey-angle">Aspiration-Led Angle</span>
+    <span class="journey-desc">Reveal the gap they did not know existed</span>
+  </div>
+</div>
+
+<div class="journey-row rv d1">
+  <!-- AD CREATIVE -->
+  <div class="ad-creative-wrap">
+    <div class="ad-creative">
+      <div class="ad-creative-header">
+        <div class="ad-platform">
+          <div class="ad-platform-icon linkedin">in</div>
+          <div>
+            <div class="ad-platform-name">Premium Finance</div>
+            <div class="ad-sponsor-tag">Sponsored</div>
+          </div>
+        </div>
+        <div class="ad-label-tag">Aspiration</div>
+      </div>
+      <div class="ad-body">
+        <div class="ad-glow" style="top:-20px;right:-60px;background:var(--gold-glow);width:280px;height:280px;"></div>
+        <div class="ad-glow" style="bottom:-40px;left:-30px;background:var(--teal-glow);"></div>
+        <div class="ad-accent-corner"></div>
+        <div class="ad-accent-corner-bl"></div>
+
+        <div class="ad-headline">There is a gap between your <strong>high street bank</strong> and <span class="gold">private banking.</span></div>
+        <div class="ad-subtext" style="font-size:0.92rem;color:var(--light);margin-bottom:8px;">Someone finally filled it.</div>
+        <div class="ad-subtext">Not a neobank. Not a chatbot. A real relationship manager who calls you by name. Starting at &pound;25,000.</div>
+
+        <div class="gap-visual">
+          <div class="gap-end">
+            <div class="gap-end-label">High Street</div>
+            <div class="gap-end-value low">1.5%</div>
+          </div>
+          <div class="gap-line"></div>
+          <div class="gap-end">
+            <div class="gap-end-label">Private Banking</div>
+            <div class="gap-end-value high">&pound;1M+</div>
+          </div>
+        </div>
+
+        <div class="ad-cta">Learn More <span class="ad-cta-arrow">&rarr;</span></div>
+        <div class="ad-accent-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-connector">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">Click</div>
+  </div>
+
+  <!-- LANDING PAGE PREVIEW -->
+  <div class="lp-preview-wrap">
+    <div class="lp-preview">
+      <div class="lp-browser-bar">
+        <div class="lp-dot lp-dot-r"></div>
+        <div class="lp-dot lp-dot-y"></div>
+        <div class="lp-dot lp-dot-g"></div>
+        <div class="lp-url">monument.co/the-gap</div>
+      </div>
+      <div class="lp-mini">
+        <div class="lp-mini-nav">
+          <div class="lp-mini-logo">Monument</div>
+          <div class="lp-mini-nav-links">
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+          </div>
+        </div>
+        <div class="lp-mini-hero">
+          <div class="lp-mini-h1">The Gap Between<br><em>High Street and Private</em></div>
+          <div class="lp-mini-sub">You have outgrown your bank. But Coutts wants a million. There is now a third option designed for people exactly like you.</div>
+          <div class="lp-mini-btn">Learn More &rarr;</div>
+          <div class="lp-mini-quote">
+            <p>"I never thought I could have a relationship manager. Monument changed that."</p>
+          </div>
+        </div>
+      </div>
+      <div class="lp-tag">landing-page-unaware.html</div>
+    </div>
+  </div>
+</div>
+
+<!-- AD 3: EDUCATION-LED -->
+<div class="journey-number rv">
+  <div class="journey-num">03</div>
+  <div class="journey-title">
+    <span class="journey-angle">Education-Led Angle</span>
+    <span class="journey-desc">Teach them about a category they did not know existed</span>
+  </div>
+</div>
+
+<div class="journey-row rv d1">
+  <!-- AD CREATIVE -->
+  <div class="ad-creative-wrap">
+    <div class="ad-creative">
+      <div class="ad-creative-header">
+        <div class="ad-platform">
+          <div class="ad-platform-icon google">G</div>
+          <div>
+            <div class="ad-platform-name">Smart Money</div>
+            <div class="ad-sponsor-tag">Sponsored</div>
+          </div>
+        </div>
+        <div class="ad-label-tag">Education</div>
+      </div>
+      <div class="ad-body">
+        <div class="ad-glow" style="top:-30px;left:50%;transform:translateX(-50%);background:var(--teal-glow);width:300px;height:300px;"></div>
+        <div class="ad-accent-corner"></div>
+        <div class="ad-accent-corner-bl"></div>
+
+        <div class="ad-headline">The gap between <strong>Monzo</strong> and <span class="gold">Coutts.</span></div>
+        <div class="ad-subtext" style="font-size:0.92rem;color:var(--light);margin-bottom:6px;">Why thousands of savers are choosing something in between.</div>
+        <div class="ad-subtext">A new category of banking. Personal service. Premium rates. No seven-figure barrier to entry.</div>
+
+        <div class="ad-trustpilot" style="margin-bottom:20px;">
+          <div class="tp-stars">
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star"></div>
+            <div class="tp-star tp-star-half"></div>
+          </div>
+          <div>
+            <div class="tp-text">4.7 Excellent</div>
+            <div class="tp-count">1,794 reviews &middot; &pound;7B trusted</div>
+          </div>
+        </div>
+
+        <div class="ad-cta">Discover <span class="ad-cta-arrow">&rarr;</span></div>
+        <div class="ad-accent-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARROW -->
+  <div class="arrow-connector">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">Click</div>
+  </div>
+
+  <!-- LANDING PAGE PREVIEW -->
+  <div class="lp-preview-wrap">
+    <div class="lp-preview">
+      <div class="lp-browser-bar">
+        <div class="lp-dot lp-dot-r"></div>
+        <div class="lp-dot lp-dot-y"></div>
+        <div class="lp-dot lp-dot-g"></div>
+        <div class="lp-url">monument.co/discover</div>
+      </div>
+      <div class="lp-mini">
+        <div class="lp-mini-nav">
+          <div class="lp-mini-logo">Monument</div>
+          <div class="lp-mini-nav-links">
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+            <div class="lp-mini-nav-link"></div>
+          </div>
+        </div>
+        <div class="lp-mini-hero">
+          <div class="lp-mini-h1">A New Category<br><em>of Banking</em></div>
+          <div class="lp-mini-sub">Not a neobank. Not a private bank. A third way designed for people with &pound;25,000 to &pound;2M who want service, rates, and a real human.</div>
+          <div class="lp-mini-btn">Discover &rarr;</div>
+          <div class="lp-mini-pain-cards">
+            <div class="lp-mini-pain-card">
+              <div class="lp-mini-pain-icon">&#128177;</div>
+              <div class="lp-mini-pain-text">Up to 4.09%<br>AER</div>
+            </div>
+            <div class="lp-mini-pain-card">
+              <div class="lp-mini-pain-icon">&#129309;</div>
+              <div class="lp-mini-pain-text">Named RM<br>in 24 hours</div>
+            </div>
+            <div class="lp-mini-pain-card">
+              <div class="lp-mini-pain-icon">&#128274;</div>
+              <div class="lp-mini-pain-text">FSCS<br>protected</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lp-tag">landing-page-unaware.html</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<!-- STRATEGY NOTES -->
+<div style="background:var(--dark);border-top:1px solid var(--border);">
+  <div class="strategy-section">
+    <div class="strategy-header">
+      <div class="strategy-tag rv">Psychology Behind the Creative</div>
+      <h2 class="rv d1">Strategy Notes</h2>
+    </div>
+
+    <div class="strategy-grid">
+      <!-- STRATEGY 1 -->
+      <div class="strategy-card-wrap rv d1">
+        <div class="strategy-card">
+          <div class="strategy-num">01</div>
+          <span class="strategy-label label-pain">Pain-Led</span>
+          <h3>Name the Exact Situation</h3>
+          <p>&pound;250,000 is not a random number. It is specific enough to make the right person stop scrolling. The line "your bank pays you 1.5% and a call centre" is designed to trigger recognition, not outrage. The viewer thinks: "That is literally me." The ad does not sell a solution. It names a problem the viewer has accepted as normal. That reframing is the click.</p>
+          <div class="metric">
+            <div class="metric-label">Primary Emotion</div>
+            <div class="metric-value pain">Recognition &rarr; Indignation</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Expected CTR Driver</div>
+            <div class="metric-value pain">Pattern interrupt through specificity</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STRATEGY 2 -->
+      <div class="strategy-card-wrap rv d2">
+        <div class="strategy-card">
+          <div class="strategy-num">02</div>
+          <span class="strategy-label label-aspiration">Aspiration</span>
+          <h3>Reveal the Gap</h3>
+          <p>This ad creates a category the viewer did not know existed. High street feels inadequate but private banking feels inaccessible. The ad names both extremes and says "someone filled it." The viewer's curiosity is not about what the product is. It is about what they have been missing. The question mark in the gap visual is literal: "There is something here you do not know about."</p>
+          <div class="metric">
+            <div class="metric-label">Primary Emotion</div>
+            <div class="metric-value gold">Curiosity &rarr; Aspiration</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Expected CTR Driver</div>
+            <div class="metric-value gold">Zeigarnik effect (open loop)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STRATEGY 3 -->
+      <div class="strategy-card-wrap rv d3">
+        <div class="strategy-card">
+          <div class="strategy-num">03</div>
+          <span class="strategy-label label-education">Education</span>
+          <h3>Category Creation</h3>
+          <p>"Monzo and Coutts" are brands every UK saver recognises. Placing them as bookends creates an instant mental map. "Something in between" is the insight: the viewer realises there is a third option they were never offered. The Trustpilot badge appears here because education requires proof. Thousands of others already found this. You are late, not early. That social proof converts hesitation into FOMO.</p>
+          <div class="metric">
+            <div class="metric-label">Primary Emotion</div>
+            <div class="metric-value teal">Discovery &rarr; FOMO</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Expected CTR Driver</div>
+            <div class="metric-value teal">Category framing + social proof</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <p>Strategy &amp; creative direction by <span class="credit">Jean Mundabi Fala</span></p>
+</div>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
